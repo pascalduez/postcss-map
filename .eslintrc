@@ -1,0 +1,32 @@
+parser: "babel-eslint"
+
+env:
+  node: true
+
+ecmaFeatures:
+  arrowFunctions: true
+  blockBindings: true
+  defaultParams: true
+  objectLiteralComputedProperties: true
+  objectLiteralDuplicateProperties: true
+  objectLiteralShorthandMethods: true
+  objectLiteralShorthandProperties: true
+  templateStrings: true
+  restParams: true
+  spread: true
+
+rules:
+  no-global-strict: 0
+  no-comma-dangle: 0
+  strict: 1
+  no-undef: 1
+  no-use-before-define: 0
+
+  quotes: [2, "single"]
+  indent: [2, 2]
+  no-mixed-spaces-and-tabs: [1, "smart-tabs"]
+  no-spaced-func: 1
+  space-after-keywords: [1, "always"]
+  space-before-function-parentheses: {"anonymous": "always", "named": "never"}
+  space-before-blocks: 'always'
+  space-in-brackets: 'always'

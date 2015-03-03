@@ -1,0 +1,9 @@
+foo: 'foo value'
+bar: 'bar value'
+baz:
+  test:
+    flag: 'flag!!'
+quux:
+  - 'one'
+  - 'two'
+  - 'three'
