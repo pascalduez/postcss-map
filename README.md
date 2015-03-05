@@ -6,23 +6,23 @@
 ## Installation
 
 ```
-npm install postcss-map
+npm install postcss-map --save-dev
 ```
 
 
 ## Usage
 
 ```js
-var fs = require('fs')
-var postcss = require('postcss')
-var map = require('postcss-map')
+var fs = require('fs');
+var postcss = require('postcss');
+var map = require('postcss-map');
 
-var css = fs.readFileSync('input.css', 'utf8')
+var css = fs.readFileSync('input.css', 'utf8');
 
 var output = postcss()
   .use(map())
   .process(css)
-  .css
+  .css;
 ```
 
 ### Example usage from declaration values
