@@ -21,6 +21,7 @@ rules:
   strict: 1
   no-undef: 1
   no-use-before-define: 0
+  curly: [2, "multi"]
 
   quotes: [2, "single"]
   indent: [2, 2]
