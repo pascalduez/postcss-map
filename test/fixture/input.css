@@ -1,7 +1,6 @@
-:root {
-  --color: red;
-}
-
 .foo {
-  content: var(--fonts--baz--test--flag);
+  content: map(breakpoints, foo);
+}
+.fonts {
+  @map fonts code Regular;
 }

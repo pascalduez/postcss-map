@@ -1,6 +1,6 @@
 'use strict';
 
-var fs = require('fs')
+var fs = require('fs');
 var path = require('path');
 var postcss = require('postcss');
 var plugin = require('../');

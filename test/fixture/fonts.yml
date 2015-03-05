@@ -1,9 +1,24 @@
-foo: 'foo value'
-bar: 'bar value'
-baz:
-  test:
-    flag: 'flag!!'
-quux:
-  - 'one'
-  - 'two'
-  - 'three'
+code:
+  Regular:
+    font-family: "'CamingoCode Regular', nonospace"
+    font-weight: "normal"
+    font-feature-settings: "zero"
+  Bold:
+    font-family: "'CamingoCode Bold', nonospace"
+    font-weight: "normal"
+    font-feature-settings: "zero"
+  Italic:
+    font-family: "'CamingoCode Italic', nonospace"
+    font-weight: "normal"
+    font-feature-settings: "zero"
+  BoldItalic:
+    font-family: "'CamingoCode BoldItalic', nonospace"
+    font-weight: "normal"
+    font-feature-settings: "zero"
+
+sans-serif:
+  Regular:
+    font-family: "'Spinnaker Regular', sans-serif"
+    font-weight: "normal"
+    font-feature-settings: "'onum', 'kern', 'liga', 'dlig', 'clig'"
+    font-kerning: "normal"
