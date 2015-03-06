@@ -24,8 +24,13 @@ var map = require('postcss-map');
 
 var css = fs.readFileSync('input.css', 'utf8');
 
+var opts = {
+  basePath: 'css/',
+  maps: [ 'example.yml', 'breakpoints.yml', 'fonts.yml' ]
+};
+
 var output = postcss()
-  .use(map())
+  .use(map(opts))
   .process(css)
   .css;
 ```
@@ -64,7 +69,6 @@ map:
 small: 320px
 medium: 321px
 large: 800px
-
 ```
 
 input:
