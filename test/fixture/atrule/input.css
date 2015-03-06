@@ -1,0 +1,5 @@
+@media screen and (min-width: map(breakpoints, medium)) {
+  .test {
+    width: 100%;
+  }
+}

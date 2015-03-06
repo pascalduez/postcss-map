@@ -1,6 +1,0 @@
-.foo {
-  content: map(breakpoints, foo);
-}
-.fonts {
-  @map fonts code Regular;
-}

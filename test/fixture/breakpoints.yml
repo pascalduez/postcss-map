@@ -1,6 +1,3 @@
-foo: 'fooval'
-bar: 'barval'
-baz:
-  - 'one'
-  - 'two'
-  - 'three'
+small: 320px
+medium: 321px
+large: 800px
