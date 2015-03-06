@@ -1,6 +1,6 @@
 # postcss-map
 
-> Use configuration maps from CSS.
+> [PostCSS] plugin enabling configuration maps.
 
 
 ## Installation
@@ -51,6 +51,38 @@ output:
 }
 ```
 
+### Example usage from at-rules parameters
+
+map:
+```yaml
+# breakpoints.yml
+small: 320px
+medium: 321px
+large: 800px
+
+```
+
+input:
+
+```css
+@media (min-width: map(breakpoints, medium)) {
+  .test {
+    width: 100%;
+  }
+}
+```
+
+output:
+
+```css
+@media (min-width: 321px) {
+  .test {
+    width: 100%;
+  }
+}
+```
+
+
 ### Example from declaration blocks
 
 map:
@@ -87,8 +119,6 @@ output:
 }
 ```
 
-Checkout tests for more.
-
 
 ## Options
 
@@ -100,7 +130,7 @@ Base path to retrieve maps from.
 ### maps
 type: `Array`  
 default: `[]`  
-An array representing maps files to parse.
+An array representing maps files to load and parse.
 
 
 ## Credits
@@ -110,4 +140,8 @@ An array representing maps files to parse.
 
 ## Licence
 
-postcss-svg is [unlicensed](http://unlicense.org/).
+postcss-map is [unlicensed](http://unlicense.org/).
+
+
+
+[PostCSS]: https://github.com/postcss/postcss

@@ -1,7 +1,7 @@
 {
   "name": "postcss-map",
   "version": "0.1.0",
-  "description": "",
+  "description": "[PostCSS] plugin enabling configuration maps",
   "keywords": [
     "css",
     "map",
@@ -32,17 +32,16 @@
   "dependencies": {
     "balanced-match": "^0.2.0",
     "js-yaml": "^3.2.7",
-    "parse-filepath": "^0.5.0"
+    "parse-filepath": "^0.5.0",
+    "postcss": "^4.0.6"
   },
   "devDependencies": {
-    "autoprefixer-core": "^5.1.7",
     "babel": "^4.6.4",
     "babel-eslint": "^1.0.13",
+    "coveralls": "^2.11.2",
     "eslint": "^0.15.1",
     "faucet": "0.0.1",
-    "gulp": "^3.8.11",
-    "gulp-postcss": "^4.0.3",
-    "postcss": "^4.0.6",
+    "istanbul": "^0.3.7",
     "tape": "^3.5.0"
   },
   "scripts": {
