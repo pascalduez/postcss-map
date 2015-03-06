@@ -1,5 +1,10 @@
 # postcss-map
 
+[![npm version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+
+
 > [PostCSS] plugin enabling configuration maps.
 
 
@@ -145,3 +150,14 @@ postcss-map is [unlicensed](http://unlicense.org/).
 
 
 [PostCSS]: https://github.com/postcss/postcss
+
+[npm-url]: https://www.npmjs.org/package/postcss-map
+[npm-image]: http://img.shields.io/npm/v/postcss-map.svg?style=flat-square
+[travis-url]: https://travis-ci.org/pascalduez/postcss-map?branch=master
+[travis-image]: http://img.shields.io/travis/pascalduez/postcss-map.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/pascalduez/postcss-map
+[coveralls-image]: https://img.shields.io/coveralls/pascalduez/postcss-map.svg?style=flat-square
+[depstat-url]: https://david-dm.org/pascalduez/postcss-map
+[depstat-image]: https://david-dm.org/pascalduez/postcss-map.svg?style=flat-square
+[license-image]: http://img.shields.io/npm/l/postcss-map.svg?style=flat-square
+[license-url]: UNLICENSE
