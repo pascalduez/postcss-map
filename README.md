@@ -140,6 +140,7 @@ Base path to retrieve maps from.
 type: `Array`  
 default: `[]`  
 An array representing maps files to load and parse.
+Map files can either be in YAML or JSON format.
 
 
 ## Credits
