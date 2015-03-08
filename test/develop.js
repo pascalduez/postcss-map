@@ -18,4 +18,4 @@ var opts = {
   var input = read(test + '/input.css');
   var css = postcss(plugin(opts)).process(input).css;
   console.log(css);
-})
+});

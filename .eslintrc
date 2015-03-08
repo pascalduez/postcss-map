@@ -6,7 +6,9 @@ env:
 ecmaFeatures:
   arrowFunctions: true
   blockBindings: true
+  classes: true
   defaultParams: true
+  modules: true
   objectLiteralComputedProperties: true
   objectLiteralDuplicateProperties: true
   objectLiteralShorthandMethods: true
@@ -14,6 +16,7 @@ ecmaFeatures:
   templateStrings: true
   restParams: true
   spread: true
+  superInFunctions: true
 
 rules:
   no-global-strict: 0
