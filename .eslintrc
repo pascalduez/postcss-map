@@ -8,6 +8,7 @@ ecmaFeatures:
   blockBindings: true
   classes: true
   defaultParams: true
+  destructuring: true
   modules: true
   objectLiteralComputedProperties: true
   objectLiteralDuplicateProperties: true
@@ -32,5 +33,5 @@ rules:
   no-spaced-func: 1
   space-after-keywords: [1, "always"]
   space-before-function-parentheses: {"anonymous": "always", "named": "never"}
-  space-before-blocks: 'always'
-  space-in-brackets: 'always'
+  space-before-blocks: "always"
+  space-in-brackets: "always"
