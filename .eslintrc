@@ -35,3 +35,4 @@ rules:
   space-before-function-parentheses: {"anonymous": "always", "named": "never"}
   space-before-blocks: "always"
   space-in-brackets: "always"
+  no-underscore-dangle: 0
