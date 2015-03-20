@@ -36,15 +36,15 @@
     "postcss": "^4.0.6"
   },
   "devDependencies": {
-    "babel": "^4.7.9",
-    "babel-eslint": "^2.0.0",
+    "babel": "^4.7.16",
+    "babel-eslint": "^2.0.2",
     "coveralls": "^2.11.2",
-    "eslint": "^0.16.2",
+    "eslint": "^0.17.1",
     "faucet": "0.0.1",
     "istanbul": "^0.3.7",
     "tape": "^3.5.0"
   },
   "scripts": {
-    "test": "make dist test"
+    "test": "make"
   }
 }
