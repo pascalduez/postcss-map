@@ -44,3 +44,15 @@ test('atrule', function (assert) {
 
   assert.equal(css, expected);
 });
+
+test('errors', function (assert) {
+  assert.plan(1);
+
+  var input = read('atrule/input.css');
+  opts.maps.push('fail.yml');
+  console._stderr.write = function () {};
+
+  assert.doesNotThrow(function () {
+    postcss(plugin(opts)).process(input);
+  });
+});

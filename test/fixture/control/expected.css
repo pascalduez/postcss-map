@@ -1,0 +1,10 @@
+.test {
+  content: 'test';
+  background: blue url(../svg/test.svg) no-repeat 0 0;
+}
+
+ul > li {
+  @media screen (min-width: 500px) {
+    content: 'test';
+  }
+}
