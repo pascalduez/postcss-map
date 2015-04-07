@@ -20,7 +20,7 @@ test('value', function (assert) {
 
   var input = read('value/input.css');
   var expected = read('value/expected.css');
-  var css = postcss(plugin(opts)).process(input).css;
+  var css = postcss([plugin(opts)]).process(input).css;
 
   assert.equal(css, expected);
 });
@@ -30,7 +30,7 @@ test('block', function (assert) {
 
   var input = read('block/input.css');
   var expected = read('block/expected.css');
-  var css = postcss(plugin(opts)).process(input).css;
+  var css = postcss([plugin(opts)]).process(input).css;
 
   assert.equal(css, expected);
 });
@@ -40,7 +40,7 @@ test('atrule', function (assert) {
 
   var input = read('atrule/input.css');
   var expected = read('atrule/expected.css');
-  var css = postcss(plugin(opts)).process(input).css;
+  var css = postcss([plugin(opts)]).process(input).css;
 
   assert.equal(css, expected);
 });
@@ -53,6 +53,6 @@ test('errors', function (assert) {
   console._stderr.write = function () {};
 
   assert.doesNotThrow(function () {
-    postcss(plugin(opts)).process(input);
+    postcss([plugin(opts)]).process(input);
   });
 });
