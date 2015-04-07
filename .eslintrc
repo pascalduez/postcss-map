@@ -21,7 +21,7 @@ ecmaFeatures:
 
 rules:
   no-global-strict: 0
-  no-comma-dangle: 0
+  comma-dangle: "always-multiline"
   strict: 1
   no-undef: 1
   no-use-before-define: 0
