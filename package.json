@@ -39,10 +39,10 @@
     "babel": "^5.0.9",
     "babel-eslint": "^2.0.2",
     "coveralls": "^2.11.2",
-    "eslint": "^0.17.1",
+    "eslint": "^0.18.0",
     "faucet": "0.0.1",
-    "istanbul": "^0.3.7",
-    "tape": "^3.5.0"
+    "istanbul": "^0.3.13",
+    "tape": "^4.0.0"
   },
   "scripts": {
     "test": "make"
