@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.3.0
+(2015-04-09)
+
+* Allow multiple map fn calls from atRules
+([#8](https://github.com/pascalduez/postcss-map/issues/8))
+
 ## 0.2.0
 (2015-04-08)
 
