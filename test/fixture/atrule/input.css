@@ -3,3 +3,11 @@
     width: 100%;
   }
 }
+
+@media (min-width: map(breakpoints, medium)) and (max-width: map(breakpoints, large)) {
+  .test {
+    width: 100%;
+  }
+}
+
+@custom-media --foo (width >= map(breakpoints, medium)) and (width <= map(breakpoints, large));

@@ -3,3 +3,11 @@
     width: 100%;
   }
 }
+
+@media (min-width: 321px) and (max-width: 800px) {
+  .test {
+    width: 100%;
+  }
+}
+
+@custom-media --foo (width >= 321px) and (width <= 800px);
