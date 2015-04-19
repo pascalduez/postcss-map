@@ -12,7 +12,13 @@ function read(name) {
 
 var opts = {
   basePath: 'test/fixture',
-  maps: [ 'dummy.yml', 'fonts.yml', 'breakpoints.yml', 'assets.yml' ]
+  maps: [
+    'dummy.yml',
+    'fonts.yml',
+    'breakpoints.yml',
+    'assets.yml',
+    'config.yml'
+  ]
 };
 
 test('value', function (assert) {
@@ -41,6 +47,26 @@ test('atrule', function (assert) {
   var input = read('atrule/input.css');
   var expected = read('atrule/expected.css');
   var css = postcss([plugin(opts)]).process(input).css;
+
+  assert.equal(css, expected);
+});
+
+test('shortcut', function (assert) {
+  assert.plan(2);
+
+  var input = read('shortcut/input.css');
+  var expected = read('shortcut/expected.css');
+  var css;
+
+  // With `config`
+  css = postcss([plugin(opts)]).process(input).css;
+
+  assert.equal(css, expected);
+
+  // With only one map.
+  var mockOpts = opts;
+  mockOpts.maps = ['dummy.yml'];
+  css = postcss([plugin(mockOpts)]).process(input).css;
 
   assert.equal(css, expected);
 });
