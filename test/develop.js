@@ -11,7 +11,7 @@ function read(name) {
 
 var opts = {
   basePath: 'test/fixture',
-  maps: [ 'dummy.yml', 'fonts.yml', 'breakpoints.yml' ]
+  maps: [ 'dummy.yml', 'fonts.yml', 'breakpoints.yml', 'assets.yml' ]
 };
 
 ['value', 'block', 'atrule'].forEach(function (test) {

@@ -1,3 +1,9 @@
 .foo {
   content: foo value;
 }
+
+.bar {
+  background-image: url(../assets/img/upper.png),
+                    url(../assets/img/between.png),
+                    url(../assets/img/under.png);
+}

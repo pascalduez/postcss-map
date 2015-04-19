@@ -30,7 +30,6 @@
     "UNLICENSE"
   ],
   "dependencies": {
-    "balanced-match": "^0.2.0",
     "js-yaml": "^3.2.7",
     "parse-filepath": "^0.5.0",
     "postcss": "^4.1.4",

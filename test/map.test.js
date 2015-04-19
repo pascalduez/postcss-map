@@ -12,7 +12,7 @@ function read(name) {
 
 var opts = {
   basePath: 'test/fixture',
-  maps: [ 'dummy.yml', 'fonts.yml', 'breakpoints.yml' ]
+  maps: [ 'dummy.yml', 'fonts.yml', 'breakpoints.yml', 'assets.yml' ]
 };
 
 test('value', function (assert) {
