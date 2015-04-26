@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.4.0
+(2015-04-26)
+
+* Add a new "short" syntax
+([#9](https://github.com/pascalduez/postcss-map/issues/9))
+
 ## 0.3.0
 (2015-04-09)
 
