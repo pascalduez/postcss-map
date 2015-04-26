@@ -30,16 +30,16 @@
     "UNLICENSE"
   ],
   "dependencies": {
-    "js-yaml": "^3.2.7",
+    "js-yaml": "^3.3.0",
     "parse-filepath": "^0.5.0",
-    "postcss": "^4.1.4",
+    "postcss": "^4.1.6",
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
-    "babel": "^5.1.10",
+    "babel": "^5.1.13",
     "babel-eslint": "^3.0.1",
     "coveralls": "^2.11.2",
-    "eslint": "^0.19.0",
+    "eslint": "^0.20.0",
     "faucet": "0.0.1",
     "istanbul": "^0.3.13",
     "tape": "^4.0.0"
