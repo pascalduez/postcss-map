@@ -143,6 +143,38 @@ An array representing maps files to load and parse.
 Map files can either be in YAML or JSON format.
 
 
+## Short syntax
+
+A shorter syntax is also available, so you don't have to type the map name on each call. To enable it you need to either have a map called `config` or only one map in your settings.
+
+```js
+var opts = {
+  basePath: 'css/',
+  maps: [ 'config.yml' ]
+};
+```
+
+map:
+```yaml
+# config.yml
+foo: 'foo value'
+```
+
+input:
+```css
+.short {
+  content: map(foo);
+}
+```
+
+output:
+```css
+.short {
+  content: 'foo value';
+}
+```
+
+
 ## Credits
 
 * [Pascal Duez](https://twitter.com/pascalduez)
