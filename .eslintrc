@@ -1,4 +1,4 @@
-# parser: "babel-eslint"
+parser: "babel-eslint"
 
 env:
   node: true
@@ -21,18 +21,26 @@ ecmaFeatures:
 
 rules:
   no-global-strict: 0
-  comma-dangle: "always-multiline"
-  strict: 1
-  no-undef: 1
+  comma-dangle: [2, "always-multiline"]
+  strict: 2
+  no-undef: 2
   no-use-before-define: 0
   curly: [2, "multi"]
 
   quotes: [2, "single"]
   indent: [2, 2]
-  no-mixed-spaces-and-tabs: [1, "smart-tabs"]
+  no-mixed-spaces-and-tabs: [2, "smart-tabs"]
   no-spaced-func: 1
-  space-after-keywords: [1, "always"]
-  space-before-function-parentheses: {"anonymous": "always", "named": "never"}
-  space-before-blocks: "always"
-  space-in-brackets: "always"
   no-underscore-dangle: 0
+  space-after-keywords: [1, "always"]
+  space-before-blocks: [1, "always"]
+  space-before-function-parentheses: [1, {
+    "anonymous": "always",
+    "named": "never" }]
+  space-in-brackets: [1, "always", {
+    "singleValue": false,
+    "objectsInArrays": false,
+    "arraysInArrays": false,
+    "arraysInObjects": true,
+    "objectsInObjects": false,
+    "propertyName": false }]

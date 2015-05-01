@@ -17,8 +17,8 @@ var opts = {
     'fonts.yml',
     'breakpoints.yml',
     'assets.yml',
-    'config.yml'
-  ]
+    'config.yml',
+  ],
 };
 
 test('value', function (assert) {
