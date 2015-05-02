@@ -150,7 +150,9 @@ A shorter syntax is also available, so you don't have to type the map name on ea
 ```js
 var opts = {
   basePath: 'css/',
-  maps: [ 'config.yml' ]
+  maps: [ 'foo.yml' ]
+  // OR
+  maps: [ 'config.yml', 'breakpoints.yml' ]
 };
 ```
 
