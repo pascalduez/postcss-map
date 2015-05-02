@@ -6,7 +6,7 @@
     "css",
     "map",
     "postcss",
-    "postcss-plugins"
+    "postcss-plugin"
   ],
   "author": {
     "name": "Pascal Duez",
