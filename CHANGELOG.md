@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.4.1
+(2015-05-02)
+
+* Use standard package keyword
+([#319](https://github.com/postcss/postcss/issues/319))
+
 ## 0.4.0
 (2015-04-26)
 
