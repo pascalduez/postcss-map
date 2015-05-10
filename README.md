@@ -176,6 +176,19 @@ output:
 }
 ```
 
+## Context
+
+Used in conjunction with [postcss-plugin-context] you can benefit from contextualized
+maps and leverage the short syntax.
+
+```css
+@context brandColors {
+  h1 {
+    color: map(primary);
+  }
+}
+```
+
 
 ## Credits
 
@@ -189,6 +202,7 @@ postcss-map is [unlicensed](http://unlicense.org/).
 
 
 [PostCSS]: https://github.com/postcss/postcss
+[postcss-plugin-context]: https://github.com/postcss/postcss-plugin-context
 
 [npm-url]: https://www.npmjs.org/package/postcss-map
 [npm-image]: http://img.shields.io/npm/v/postcss-map.svg?style=flat-square
