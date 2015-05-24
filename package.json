@@ -18,10 +18,7 @@
     "type": "git",
     "url": "git://github.com/pascalduez/postcss-map.git"
   },
-  "license": {
-    "type": "unlicence",
-    "url": "http://unlicense.org"
-  },
+  "license": "Unlicense",
   "files": [
     "dist",
     "CHANGELOG.md",
