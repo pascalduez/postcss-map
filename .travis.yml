@@ -8,4 +8,8 @@ node_js:
 before_install:
   - npm i npm@latest -g
 
+sudo: false
+
 script: make travis
+
+
