@@ -25,15 +25,15 @@ test: dist
 
 cover: dist
 	rm -rf coverage
-	istanbul cover --report none --print detail tape test/*.test.js
+	babel-istanbul cover --report none --print detail tape test/*.test.js
 
 cover-browse: dist
 	rm -rf coverage
-	istanbul cover --report html tape test/*.test.js
+	babel-istanbul cover --report html tape test/*.test.js
 	open coverage/index.html
 
 travis: lint cover
-	istanbul report lcovonly
+	babel-istanbul report lcovonly
 	(cat coverage/lcov.info | coveralls) || exit 0
 	rm -rf coverage
 

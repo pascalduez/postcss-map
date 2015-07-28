@@ -1,4 +1,4 @@
 {
   "stage": 0,
-  "auxiliaryComment": "istanbul ignore next"
+  "auxiliaryCommentBefore": "istanbul ignore next"
 }

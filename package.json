@@ -28,18 +28,18 @@
   ],
   "dependencies": {
     "js-yaml": "^3.3.1",
-    "parse-filepath": "^0.5.0",
-    "postcss": "^4.1.10",
+    "parse-filepath": "^0.6.2",
+    "postcss": "^4.1.16",
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
-    "babel": "^5.4.3",
-    "babel-eslint": "^3.1.3",
-    "coveralls": "^2.11.2",
-    "eslint": "0.21.0",
+    "babel": "^5.8.9",
+    "babel-eslint": "^4.0.5",
+    "babel-istanbul": "^0.2.10",
+    "coveralls": "^2.11.3",
+    "eslint": "^0.24.1",
     "faucet": "0.0.1",
-    "istanbul": "^0.3.14",
-    "tape": "^4.0.0"
+    "tape": "^4.0.1"
   },
   "scripts": {
     "test": "make"
