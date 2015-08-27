@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.4.2
+(2015-08-27)
+
+* Upgrade to PostCSS 5
+* Several development process updates
+
 ## 0.4.1
 (2015-05-02)
 
