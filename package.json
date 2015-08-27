@@ -34,10 +34,10 @@
   },
   "devDependencies": {
     "babel": "^5.8.9",
-    "babel-eslint": "^4.0.5",
+    "babel-eslint": "^4.1.0",
     "babel-istanbul": "^0.3.18",
     "coveralls": "^2.11.3",
-    "eslint": "^1.0.0",
+    "eslint": "^1.2.1",
     "faucet": "0.0.1",
     "opn-cli": "^1.0.0",
     "tape": "^4.0.1"

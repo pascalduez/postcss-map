@@ -1,39 +1,28 @@
+---
 parser: "babel-eslint"
+extends: "eslint:recommended"
+root: true
 
 env:
   node: true
-
-ecmaFeatures:
-  arrowFunctions: true
-  blockBindings: true
-  classes: true
-  defaultParams: true
-  destructuring: true
-  modules: true
-  objectLiteralComputedProperties: true
-  objectLiteralDuplicateProperties: true
-  objectLiteralShorthandMethods: true
-  objectLiteralShorthandProperties: true
-  templateStrings: true
-  restParams: true
-  spread: true
-  superInFunctions: true
+  es6: true
 
 rules:
   no-global-strict: 0
   comma-dangle: [2, "always-multiline"]
-  strict: 2
+  strict: [1, "global"]
   no-undef: 2
   no-use-before-define: 0
   curly: [2, "multi"]
+  no-console: 1
 
   quotes: [2, "single"]
   indent: [2, 2]
   no-mixed-spaces-and-tabs: [2, "smart-tabs"]
-  no-spaced-func: 1
   no-underscore-dangle: 0
-  space-after-keywords: [1, "always"]
+  no-spaced-func: 1
   space-before-blocks: [1, "always"]
+  space-after-keywords: [1, "always"]
   space-before-function-paren: [1, {
     "anonymous": "always",
     "named": "never" }]
