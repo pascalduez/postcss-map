@@ -39,6 +39,7 @@
     "coveralls": "^2.11.3",
     "eslint": "^1.0.0",
     "faucet": "0.0.1",
+    "opn-cli": "^1.0.0",
     "tape": "^4.0.1"
   },
   "scripts": {
