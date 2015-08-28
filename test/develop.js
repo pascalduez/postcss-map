@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var path = require('path');
 var postcss = require('postcss');
@@ -9,10 +11,21 @@ function read(name) {
 
 var opts = {
   basePath: 'test/fixture',
-  maps: ['dummy.yml', 'fonts.yml', 'breakpoints.yml', 'assets.yml'],
+  maps: [
+    {
+      config: {
+        foo: 'foo value',
+        bar: 'bar value',
+      },
+    },
+    'dummy.yml',
+    'fonts.yml',
+    'breakpoints.yml',
+    'assets.yml',
+  ],
 };
 
-['value', 'block', 'atrule'].forEach(function (test) {
+['object', 'value', 'block', 'atrule'].forEach(function (test) {
   var input = read(test + '/input.css');
   var css = postcss(plugin(opts)).process(input).css;
   console.log(css);

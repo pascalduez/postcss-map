@@ -1,3 +1,5 @@
+'use strict';
+
 var fs = require('fs');
 var path = require('path');
 var test = require('tape');
@@ -45,6 +47,44 @@ test('atrule', function (assert) {
   var input = read('atrule/input.css');
   var expected = read('atrule/expected.css');
   var css = postcss([plugin(opts)]).process(input).css;
+
+  assert.equal(css, expected);
+});
+
+test('object', function (assert) {
+  assert.plan(1);
+
+  var localOpts = {
+    maps: [
+      {
+        config: {
+          foo: 'foo value',
+          bar: 'bar value',
+        },
+      },
+    ],
+  };
+
+  var input = read('object/input.css');
+  var expected = read('object/expected.css');
+  var css = postcss([plugin(localOpts)]).process(input).css;
+
+  assert.equal(css, expected);
+});
+
+test('object:short', function (assert) {
+  assert.plan(1);
+
+  var localOpts = {
+    maps: [{
+      foo: 'foo value',
+      bar: 'bar value',
+    }],
+  };
+
+  var input = read('object-short/input.css');
+  var expected = read('object-short/expected.css');
+  var css = postcss([plugin(localOpts)]).process(input).css;
 
   assert.equal(css, expected);
 });
