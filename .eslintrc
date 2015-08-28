@@ -13,7 +13,7 @@ rules:
   strict: [1, "global"]
   no-undef: 2
   no-use-before-define: 0
-  curly: [2, "multi"]
+  curly: [1, "multi"]
   no-console: 1
 
   quotes: [2, "single"]
