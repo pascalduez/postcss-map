@@ -128,6 +128,95 @@ output:
 }
 ```
 
+### Example usage with literal objects
+
+```js
+var fs = require('fs');
+var postcss = require('postcss');
+var map = require('postcss-map');
+
+var css = fs.readFileSync('input.css', 'utf8');
+
+var opts = {
+  basePath: 'css/',
+  maps: [
+    { dummy: {
+        one: 1,
+        two: 2,
+      },
+    },
+    'example.yml',
+    'breakpoints.yml',
+    'fonts.yml'
+  }]
+};
+
+var output = postcss()
+  .use(map(opts))
+  .process(css)
+  .css;
+```
+
+input:
+
+```css
+.whatever {
+  content: map(dummy, one);
+}
+.baz {
+  content: map(example, foo, bar, baz);
+}
+```
+
+output:
+
+```css
+.whatever {
+  content: 1;
+}
+.baz {
+  content: 'yeah!';
+}
+```
+
+### Example usage with literal objects and short syntax
+
+```js
+var fs = require('fs');
+var postcss = require('postcss');
+var map = require('postcss-map');
+
+var css = fs.readFileSync('input.css', 'utf8');
+
+var opts = {
+  maps: [{
+    one: 1,
+    two: 2,
+  }]
+};
+
+var output = postcss()
+  .use(map(opts))
+  .process(css)
+  .css;
+```
+
+input:
+
+```css
+.whatever {
+  content: map(one);
+}
+```
+
+output:
+
+```css
+.whatever {
+  content: 1;
+}
+```
+
 
 ## Options
 
@@ -140,7 +229,8 @@ Base path to retrieve maps from.
 type: `Array`  
 default: `[]`  
 An array representing maps files to load and parse.
-Map files can either be in YAML or JSON format.
+Map files can either be in YAML or JSON format.  
+You can also pass literal objects directly into the Array.
 
 
 ## Short syntax
