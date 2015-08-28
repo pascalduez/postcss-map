@@ -1,5 +1,12 @@
 # postcss-map changelog
 
+## 0.6.0
+(2015-08-28)
+
+* Prevent duplicate Parser initialization
+* Allow literal objects as map
+([#15](https://github.com/pascalduez/postcss-map/issues/15))
+
 ## 0.5.0
 (2015-08-27)
 
