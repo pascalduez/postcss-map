@@ -1,4 +1,7 @@
 {
   "stage": 0,
-  "auxiliaryCommentBefore": "istanbul ignore next"
+  "auxiliaryCommentBefore": "istanbul ignore next",
+  "plugins": [
+    "object-assign"
+  ]
 }
