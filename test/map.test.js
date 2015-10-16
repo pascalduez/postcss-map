@@ -26,9 +26,10 @@ test('value', function (assert) {
 
   var input = read('value/input.css');
   var expected = read('value/expected.css');
-  var css = postcss([plugin(opts)]).process(input).css;
+  postcss([plugin(opts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 
-  assert.equal(css, expected);
 });
 
 test('block', function (assert) {
@@ -36,9 +37,9 @@ test('block', function (assert) {
 
   var input = read('block/input.css');
   var expected = read('block/expected.css');
-  var css = postcss([plugin(opts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(opts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 });
 
 test('atrule', function (assert) {
@@ -46,9 +47,9 @@ test('atrule', function (assert) {
 
   var input = read('atrule/input.css');
   var expected = read('atrule/expected.css');
-  var css = postcss([plugin(opts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(opts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 });
 
 test('object', function (assert) {
@@ -67,9 +68,9 @@ test('object', function (assert) {
 
   var input = read('object/input.css');
   var expected = read('object/expected.css');
-  var css = postcss([plugin(localOpts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(localOpts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 });
 
 test('object:short', function (assert) {
@@ -84,9 +85,9 @@ test('object:short', function (assert) {
 
   var input = read('object-short/input.css');
   var expected = read('object-short/expected.css');
-  var css = postcss([plugin(localOpts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(localOpts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 });
 
 test('shortcut', function (assert) {
@@ -94,19 +95,18 @@ test('shortcut', function (assert) {
 
   var input = read('shortcut/input.css');
   var expected = read('shortcut/expected.css');
-  var css;
 
   // With `config`
-  css = postcss([plugin(opts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(opts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 
   // With only one map.
   var mockOpts = opts;
   mockOpts.maps = ['dummy.yml'];
-  css = postcss([plugin(mockOpts)]).process(input).css;
-
-  assert.equal(css, expected);
+  postcss([plugin(mockOpts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 });
 
 test('errors', function (assert) {

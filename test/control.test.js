@@ -16,21 +16,23 @@ test('control', function (assert) {
 
   var input = read('control/input.css');
   var expected = read('control/expected.css');
-  var css;
 
   // No opts passed, no maps.
-  css = postcss([plugin]).process(input).css;
-  assert.equal(css, expected);
+  postcss([plugin]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 
   // PostCSS legacy API.
-  css = postcss([plugin.postcss]).process(input).css;
-  assert.equal(css, expected);
+  postcss([plugin.postcss]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
 
   // PostCSS API.
   var processor = postcss();
   processor.use(plugin);
-  css = processor.process(input).toString();
-  assert.equal(css, expected);
+  processor.process(input).then(function (result) {
+    assert.equal(result.toString(), expected);
+  });
 
   assert.equal(processor.plugins[0].postcssPlugin, pluginName);
   assert.ok(processor.plugins[0].postcssVersion);
