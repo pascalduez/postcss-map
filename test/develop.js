@@ -1,5 +1,6 @@
 'use strict';
 
+require('es6-promise').polyfill();
 var fs = require('fs');
 var path = require('path');
 var postcss = require('postcss');
@@ -27,6 +28,7 @@ var opts = {
 
 ['object', 'value', 'block', 'atrule'].forEach(function (test) {
   var input = read(test + '/input.css');
-  var css = postcss(plugin(opts)).process(input).css;
-  console.log(css);
+  postcss(plugin(opts)).process(input).then(function (result) {
+    console.log(result.css);
+  });
 });
