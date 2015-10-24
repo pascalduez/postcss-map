@@ -282,7 +282,9 @@ maps and leverage the short syntax.
 
 ## Credits
 
-* [Pascal Duez](https://twitter.com/pascalduez)
+* [Pascal Duez](https://github.com/pascalduez)
+* [Bogdan Chadkin](https://github.com/TrySound)
+
 
 
 ## Licence
