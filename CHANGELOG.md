@@ -1,5 +1,12 @@
 # postcss-map changelog
 
+## 0.7.0
+(2015-10-24)
+
+* postcss-map is now fully async
+([#17](https://github.com/pascalduez/postcss-map/pull/17))
+* Reduced the number of AST loops
+
 ## 0.6.0
 (2015-08-28)
 
