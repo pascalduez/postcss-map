@@ -38,6 +38,7 @@
     "babel-istanbul": "^0.3.18",
     "babel-plugin-object-assign": "^1.2.1",
     "coveralls": "^2.11.3",
+    "es6-promise": "^3.0.2",
     "eslint": "^1.2.1",
     "faucet": "0.0.1",
     "opn-cli": "^1.0.0",
