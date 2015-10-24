@@ -28,7 +28,6 @@
   ],
   "dependencies": {
     "js-yaml": "^3.3.1",
-    "parse-filepath": "^0.6.3",
     "postcss": "^5.0.2",
     "reduce-function-call": "^1.0.1"
   },
