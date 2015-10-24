@@ -114,9 +114,8 @@ test('errors', function (assert) {
 
   var input = read('atrule/input.css');
   opts.maps.push('fail.yml');
-  console._stderr.write = function () {};
 
-  assert.doesNotThrow(function () {
-    postcss([plugin(opts)]).process(input);
+  postcss([plugin(opts)]).process(input).catch(function (err) {
+    assert.equal(err.name, 'YAMLException');
   });
 });
