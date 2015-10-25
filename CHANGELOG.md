@@ -1,5 +1,10 @@
 # postcss-map changelog
 
+## 0.7.1
+(2015-10-25)
+
+* Update Readme examples to use PostCSS async API.
+
 ## 0.7.0
 (2015-10-24)
 
