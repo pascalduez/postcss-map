@@ -137,7 +137,7 @@ var fs = require('fs');
 var postcss = require('postcss');
 var map = require('postcss-map');
 
-var css = fs.readFileSync('input.css', 'utf8');
+var input = fs.readFileSync('input.css', 'utf8');
 
 var opts = {
   basePath: 'css/',
@@ -153,10 +153,12 @@ var opts = {
   }]
 };
 
-var output = postcss()
+postcss()
   .use(map(opts))
-  .process(css)
-  .css;
+  .process(input)
+  .then(function (result) {
+    fs.writeFileSync('output.css', result.css);
+  });
 ```
 
 input:
@@ -188,7 +190,7 @@ var fs = require('fs');
 var postcss = require('postcss');
 var map = require('postcss-map');
 
-var css = fs.readFileSync('input.css', 'utf8');
+var input = fs.readFileSync('input.css', 'utf8');
 
 var opts = {
   maps: [{
@@ -197,10 +199,12 @@ var opts = {
   }]
 };
 
-var output = postcss()
+postcss()
   .use(map(opts))
-  .process(css)
-  .css;
+  .process(input)
+  .then(function (result) {
+    fs.writeFileSync('output.css', result.css);
+  });
 ```
 
 input:
