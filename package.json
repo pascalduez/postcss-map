@@ -32,7 +32,7 @@
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
-    "babel": "^5.8.9",
+    "babel": "^6.0.0",
     "babel-core": "^5.8.23",
     "babel-eslint": "^4.1.3",
     "babel-istanbul": "^0.4.0",
