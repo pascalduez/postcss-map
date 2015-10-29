@@ -111,12 +111,13 @@ test('shortcut', function (assert) {
 });
 
 test('errors', function (assert) {
-  assert.plan(1);
+  assert.plan(2);
 
   var input = read('atrule/input.css');
   opts.maps.push('fail.yml');
 
   postcss([plugin(opts)]).process(input).catch(function (err) {
     assert.equal(err.name, 'YAMLException');
+    assert.ok(err.toString().indexOf('fail.yml') !== -1);
   });
 });
