@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.7.2
+(2015-10-29)
+
+* Add filename to yaml parser for more informative error message.
+* Fix exceptions in promise.
+
 ## 0.7.1
 (2015-10-25)
 
