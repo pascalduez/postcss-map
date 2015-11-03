@@ -1,7 +1,6 @@
 {
-  "stage": 0,
-  "auxiliaryCommentBefore": "istanbul ignore next",
+  "presets": ["es2015"],
   "plugins": [
-    "object-assign"
+    "transform-object-assign"
   ]
 }
