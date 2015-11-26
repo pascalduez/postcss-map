@@ -57,18 +57,40 @@ test('object', function (assert) {
   assert.plan(1);
 
   var localOpts = {
-    maps: [
-      {
-        config: {
-          foo: 'foo value',
-          bar: 'bar value',
-        },
+    maps: [{
+      config: {
+        foo: 'foo value',
+        bar: 'bar value',
       },
-    ],
+    }],
   };
 
   var input = read('object/input.css');
   var expected = read('object/expected.css');
+  postcss([plugin(localOpts)]).process(input).then(function (result) {
+    assert.equal(result.css, expected);
+  });
+});
+
+test('object:custom', function (assert) {
+  assert.plan(1);
+
+  var localOpts = {
+    defaultMap: 'custom',
+    maps: [{
+      custom: {
+        foo: 'custom foo value',
+        bar: 'custom bar value',
+      },
+      config: {
+        foo: 'config foo value',
+        bar: 'config bar value',
+      },
+    }],
+  };
+
+  var input = read('object-custom/input.css');
+  var expected = read('object-custom/expected.css');
   postcss([plugin(localOpts)]).process(input).then(function (result) {
     assert.equal(result.css, expected);
   });

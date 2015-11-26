@@ -1,0 +1,6 @@
+.foo {
+  content: map(custom, foo);
+}
+.foo--short {
+  content: map(foo);
+}

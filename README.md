@@ -239,7 +239,9 @@ Map files can either be in YAML or JSON format.
 You can also pass literal objects directly into the Array.
 
 
-## Short syntax
+### defaultMap (short syntax)
+type: `string`  
+default: `config`  
 
 A shorter syntax is also available, so you don't have to type the map name on each call. To enable it you need to either have a map called `config` or only one map in your settings.
 
