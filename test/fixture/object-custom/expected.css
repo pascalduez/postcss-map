@@ -1,0 +1,6 @@
+.foo {
+  content: custom foo value;
+}
+.foo--short {
+  content: custom foo value;
+}
