@@ -1,5 +1,11 @@
 # postcss-map changelog
 
+## 0.8.0
+(2015-12-26)
+
+* Added a `defaultMap` option as well as a default `config` map.
+([#10](https://github.com/pascalduez/postcss-map/issues/10))
+
 ## 0.7.2
 (2015-10-29)
 
