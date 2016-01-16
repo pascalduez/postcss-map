@@ -41,7 +41,7 @@
     "es6-promise": "^3.0.2",
     "eslint": "^1.9.0",
     "faucet": "0.0.1",
-    "opn-cli": "^1.0.0",
+    "opn-cli": "^2.0.0",
     "tape": "^4.0.1"
   },
   "scripts": {
