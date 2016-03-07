@@ -30,7 +30,6 @@ test('value', function (assert) {
   postcss([plugin(opts)]).process(input).then(function (result) {
     assert.equal(result.css, expected);
   });
-
 });
 
 test('block', function (assert) {
