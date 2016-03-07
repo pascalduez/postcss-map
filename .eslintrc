@@ -25,7 +25,7 @@ rules:
   no-underscore-dangle: 0
   no-spaced-func: 1
   space-before-blocks: [1, "always"]
-  space-after-keywords: [1, "always"]
+  keyword-spacing: 1
   space-before-function-paren: [1, {
     "anonymous": "always",
     "named": "never" }]
