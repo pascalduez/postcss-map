@@ -27,7 +27,7 @@
     "UNLICENSE"
   ],
   "dependencies": {
-    "js-yaml": "^3.3.1",
+    "js-yaml": "^3.5.4",
     "postcss": "^5.0.12",
     "reduce-function-call": "^1.0.1"
   },
