@@ -1,6 +1,5 @@
 'use strict';
 
-require('es6-promise').polyfill();
 var fs = require('fs');
 var path = require('path');
 var test = require('tape');
