@@ -44,6 +44,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "faucet": "0.0.1",
     "opn-cli": "^3.0.0",
+    "postcss-reporter": "^1.4.1",
     "tape": "^4.5.1"
   },
   "scripts": {
