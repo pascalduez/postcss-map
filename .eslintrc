@@ -2,11 +2,14 @@
 parser: "babel-eslint"
 extends: "standard"
 root: true
+env:
+  jest: true
 
 rules:
   semi: [2, "always"]
   comma-dangle: [2, "always-multiline"]
-  arrow-parens: [2, "as-needed"]
   space-before-function-paren: [2, {
     "anonymous": "always",
     "named": "never" }]
+  # https://github.com/eslint/eslint/issues/7101
+  arrow-parens: off
