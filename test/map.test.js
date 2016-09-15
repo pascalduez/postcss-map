@@ -134,7 +134,24 @@ test('shortcut', async () => {
   expect(result.css).toBe(expected);
 });
 
-test('errors', async () => {
+test('errors:path', async () => {
+  const input = read('atrule/input.css');
+  const localOpts = {
+    ...opts,
+    maps: [...opts.maps, 'blow.yml'],
+  };
+
+  try {
+    await postcss()
+      .use(plugin(localOpts))
+      .process(input);
+  } catch (ex) {
+    expect(ex.code).toBe('ENOENT');
+    expect(ex.toString()).toMatch(/blow.yml/);
+  }
+});
+
+test('errors:yaml', async () => {
   const input = read('atrule/input.css');
   const localOpts = {
     ...opts,
