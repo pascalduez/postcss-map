@@ -20,22 +20,17 @@ develop: dist
 lint:
 	eslint ./lib ./test
 
-test: dist
-	tape test/*.test.js | faucet
+test: lint
+	jest
 
-cover: dist
-	rm -rf coverage
-	babel-istanbul cover --report none --print detail tape test/*.test.js
+cover:
+	jest --coverage
 
-cover-browse: dist
-	rm -rf coverage
-	babel-istanbul cover --report html tape test/*.test.js
-	opn coverage/index.html
+cover-browse: cover
+	opn ./coverage/lcov-report/index.html
 
-travis: lint cover
-	babel-istanbul report lcovonly
-	(cat coverage/lcov.info | coveralls) || exit 0
-	rm -rf coverage
+coveralls: cover
+	(cat ./coverage/lcov.info | coveralls) || exit 0
 
 
 # Publish package to npm
@@ -68,4 +63,4 @@ rebuild:
 
 
 .PHONY: dist develop test
-.SILENT: dist develop cover travis
+.SILENT: dist develop cover

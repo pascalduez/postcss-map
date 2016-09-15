@@ -1,39 +1,38 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import postcss from 'postcss';
+import plugin from '../lib';
 
-var fs = require('fs');
-var path = require('path');
-var test = require('tape');
-var postcss = require('postcss');
-var plugin = require('../');
-var pluginName = require('../package.json').name;
+const pluginName = require('../package.json').name;
 
-function read(name) {
-  return fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
-}
+const read = name =>
+  fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
 
-test('control', function (assert) {
-  assert.plan(5);
+const expected = read('control/expected.css');
+const input = read('control/input.css');
 
-  var input = read('control/input.css');
-  var expected = read('control/expected.css');
+test('control: no options', () =>
+  postcss([plugin])
+    .process(input)
+    .then(result => {
+      expect(result.css).toBe(expected);
+    }));
 
-  // No opts passed, no maps.
-  postcss([plugin]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+test('control: with options', () =>
+  postcss([plugin({})])
+    .process(input)
+    .then(result => {
+      expect(result.css).toBe(expected);
+    }));
 
-  // PostCSS legacy API.
-  postcss([plugin.postcss]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
-
-  // PostCSS API.
-  var processor = postcss();
+test('control: PostCSS API', async () => {
+  const processor = postcss();
   processor.use(plugin);
-  processor.process(input).then(function (result) {
-    assert.equal(result.toString(), expected);
-  });
 
-  assert.equal(processor.plugins[0].postcssPlugin, pluginName);
-  assert.ok(processor.plugins[0].postcssVersion);
+  const result = await processor.process(input);
+
+  expect(result.css).toBe(expected);
+
+  expect(processor.plugins[0].postcssPlugin).toBe(pluginName);
+  expect(processor.plugins[0].postcssVersion).toBeDefined();
 });

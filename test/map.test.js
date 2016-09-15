@@ -1,16 +1,12 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import postcss from 'postcss';
+import plugin from '../lib';
 
-var fs = require('fs');
-var path = require('path');
-var test = require('tape');
-var postcss = require('postcss');
-var plugin = require('../');
+const read = name =>
+  fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
 
-function read(name) {
-  return fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
-}
-
-var opts = {
+let opts = {
   basePath: 'test/fixture',
   maps: [
     'dummy.yml',
@@ -21,40 +17,43 @@ var opts = {
   ],
 };
 
-test('value', function (assert) {
-  assert.plan(1);
+test('value', async () => {
+  const input = read('value/input.css');
+  const expected = read('value/expected.css');
 
-  var input = read('value/input.css');
-  var expected = read('value/expected.css');
-  postcss([plugin(opts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('block', function (assert) {
-  assert.plan(1);
+test('block', async () => {
+  const input = read('block/input.css');
+  const expected = read('block/expected.css');
 
-  var input = read('block/input.css');
-  var expected = read('block/expected.css');
-  postcss([plugin(opts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('atrule', function (assert) {
-  assert.plan(1);
+test('atrule', async () => {
+  const input = read('atrule/input.css');
+  const expected = read('atrule/expected.css');
 
-  var input = read('atrule/input.css');
-  var expected = read('atrule/expected.css');
-  postcss([plugin(opts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('object', function (assert) {
-  assert.plan(1);
-
-  var localOpts = {
+test('object', async () => {
+  const input = read('object/input.css');
+  const expected = read('object/expected.css');
+  const localOpts = {
     maps: [{
       config: {
         foo: 'foo value',
@@ -63,17 +62,17 @@ test('object', function (assert) {
     }],
   };
 
-  var input = read('object/input.css');
-  var expected = read('object/expected.css');
-  postcss([plugin(localOpts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(localOpts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('object:custom', function (assert) {
-  assert.plan(1);
-
-  var localOpts = {
+test('object:custom', async () => {
+  const input = read('object-custom/input.css');
+  const expected = read('object-custom/expected.css');
+  const localOpts = {
     defaultMap: 'custom',
     maps: [{
       custom: {
@@ -87,57 +86,67 @@ test('object:custom', function (assert) {
     }],
   };
 
-  var input = read('object-custom/input.css');
-  var expected = read('object-custom/expected.css');
-  postcss([plugin(localOpts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(localOpts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('object:short', function (assert) {
-  assert.plan(1);
-
-  var localOpts = {
+test('object:short', async () => {
+  const input = read('object-short/input.css');
+  const expected = read('object-short/expected.css');
+  const localOpts = {
     maps: [{
       foo: 'foo value',
       bar: 'bar value',
     }],
   };
 
-  var input = read('object-short/input.css');
-  var expected = read('object-short/expected.css');
-  postcss([plugin(localOpts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  const result = await postcss()
+    .use(plugin(localOpts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('shortcut', function (assert) {
-  assert.plan(2);
-
-  var input = read('shortcut/input.css');
-  var expected = read('shortcut/expected.css');
+test('shortcut', async () => {
+  const input = read('shortcut/input.css');
+  const expected = read('shortcut/expected.css');
+  const localOpts = {
+    ...opts,
+    maps: ['dummy.yml'],
+  };
+  let result;
 
   // With `config`
-  postcss([plugin(opts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  result = await postcss()
+    .use(plugin(opts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 
   // With only one map.
-  var mockOpts = opts;
-  mockOpts.maps = ['dummy.yml'];
-  postcss([plugin(mockOpts)]).process(input).then(function (result) {
-    assert.equal(result.css, expected);
-  });
+  result = await postcss()
+    .use(plugin(localOpts))
+    .process(input);
+
+  expect(result.css).toBe(expected);
 });
 
-test('errors', function (assert) {
-  assert.plan(2);
+test('errors', async () => {
+  const input = read('atrule/input.css');
+  const localOpts = {
+    ...opts,
+    maps: [...opts.maps, 'fail.yml'],
+  };
 
-  var input = read('atrule/input.css');
-  opts.maps.push('fail.yml');
-
-  postcss([plugin(opts)]).process(input).catch(function (err) {
-    assert.equal(err.name, 'YAMLException');
-    assert.ok(err.toString().indexOf('fail.yml') !== -1);
-  });
+  try {
+    await postcss()
+      .use(plugin(localOpts))
+      .process(input);
+  } catch (ex) {
+    expect(ex.name).toBe('YAMLException');
+    expect(ex.toString()).toMatch(/fail.yml/);
+  }
 });
