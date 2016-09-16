@@ -33,7 +33,7 @@
   "jest": {
     "testEnvironment": "node",
     "collectCoverageFrom": [
-      "lib/*.js"
+      "src/*.js"
     ]
   },
   "dependencies": {

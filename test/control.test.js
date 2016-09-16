@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import postcss from 'postcss';
-import plugin from '../lib';
+import plugin from '../src';
 
 const pluginName = require('../package.json').name;
 

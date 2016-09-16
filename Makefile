@@ -8,7 +8,7 @@ all: lint dist test
 
 dist:
 	rm -rf $@
-	babel lib -d $@
+	babel ./src -d $@
 
 develop: dist
 	babel-node $@
@@ -18,7 +18,7 @@ develop: dist
 # ============
 
 lint:
-	eslint ./lib ./test
+	eslint ./src ./test
 
 test: lint
 	jest
