@@ -3,7 +3,7 @@ import rfc from 'reduce-function-call';
 
 const reMap = /((?:map)\()(.*)(\))/;
 
-export default class Parser {
+export default class Visitor {
   constructor(opts = {}, maps = {}) {
     this.opts = opts;
     this.maps = maps;

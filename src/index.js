@@ -2,7 +2,7 @@ import path from 'path';
 import { readFile } from 'fs';
 import postcss from 'postcss';
 import yaml from 'js-yaml';
-import Parser from './parser';
+import Visitor from './visitor';
 
 export default postcss.plugin('postcss-map', opts => {
   opts = Object.assign({
@@ -44,14 +44,14 @@ export default postcss.plugin('postcss-map', opts => {
 
   return css => {
     return Promise.all(promises).then(() => {
-      const parser = new Parser(opts, maps);
+      const visitor = new Visitor(opts, maps);
 
       css.walk(node => {
         if (node.type === 'decl') {
-          return parser.processDecl(node);
+          return visitor.processDecl(node);
         }
         if (node.type === 'atrule') {
-          return parser.processAtRule(node);
+          return visitor.processAtRule(node);
         }
       });
     });
