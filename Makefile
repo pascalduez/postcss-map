@@ -10,7 +10,7 @@ dist:
 	rm -rf $@
 	babel ./src -d $@
 
-develop: dist
+develop:
 	babel-node $@
 
 

@@ -1,0 +1,10 @@
+schemes:
+  green:
+    color: '#00FF00'
+    text: '#FFFFFF'
+  blue:
+    color: '#0000FF'
+    text: '#FFFFFF'
+  red:
+    color: '#FF0000'
+    text: '#FFFFFF'

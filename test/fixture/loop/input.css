@@ -1,0 +1,5 @@
+@each $scheme, $color in map(loop, schemes) {
+  .foo-$(scheme) {
+    content: $(color);
+  }
+}

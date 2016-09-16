@@ -54,6 +54,7 @@
     "eslint-plugin-standard": "^2.0.0",
     "jest-cli": "^15.1.1",
     "opn-cli": "^3.0.0",
+    "postcss-each": "^0.9.3",
     "postcss-reporter": "^1.4.1"
   }
 }

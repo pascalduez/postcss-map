@@ -1,5 +1,6 @@
 import { list } from 'postcss';
 import rfc from 'reduce-function-call';
+import { isString, isArray, isPlainObject } from './helpers';
 
 const reMap = /((?:map)\()(.*)(\))/;
 
@@ -74,7 +75,25 @@ export default class Visitor {
       props = args;
     }
 
-    return props.reduce((acc, prop) => (acc[prop]), this.maps[name]);
+    return this.formatValue(
+      props.reduce((acc, prop) => acc[prop], this.maps[name])
+    );
+  }
+
+  formatValue = (value) => {
+    if (isString(value)) {
+      return value;
+    }
+    if (isArray(value)) {
+      return value.join(', ');
+    }
+    if (isPlainObject(value)) {
+      return `(${Object.keys(value).join(', ')}), ${
+        Object.values(value).map(this.formatValue)
+      }`;
+    }
+
+    return value;
   }
 
   /**
