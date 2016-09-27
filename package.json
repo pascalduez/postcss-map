@@ -42,7 +42,7 @@
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.1.18",
+    "babel-cli": "^6.8.0",
     "babel-eslint": "^6.0.0",
     "babel-plugin-transform-object-assign": "^6.1.18",
     "babel-preset-es2015": "^6.1.18",
