@@ -50,7 +50,7 @@
     "coveralls": "^2.11.3",
     "eslint": "^3.7.1",
     "eslint-config-standard": "^6.0.0",
-    "eslint-plugin-promise": "^2.0.0",
+    "eslint-plugin-promise": "^3.0.0",
     "eslint-plugin-standard": "^2.0.0",
     "jest-cli": "^16.0.1",
     "opn-cli": "^3.0.0",
