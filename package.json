@@ -51,7 +51,7 @@
     "eslint": "^3.9.1",
     "eslint-config-standard": "^7.0.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.0.0",
+    "eslint-plugin-standard": "^2.2.0",
     "jest-cli": "^19.0.0",
     "opn-cli": "^3.0.0",
     "postcss-reporter": "^3.0.0"
