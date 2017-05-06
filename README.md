@@ -1,5 +1,7 @@
 # postcss-map
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/pascalduez/postcss-map.svg)](https://greenkeeper.io/)
+
 [![npm version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
