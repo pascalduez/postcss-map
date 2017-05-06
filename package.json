@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.5.4",
-    "postcss": "^5.0.12",
+    "postcss": "^6.0.0",
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
