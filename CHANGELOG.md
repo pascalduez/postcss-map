@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.9.0] - 2017-05-07
+### Changed
+  * PostCSS 6 upgrade.
+
 ## [0.8.0] - 2015-12-26
 ### Added
   * Add a `defaultMap` option as well as a default `config` map.
