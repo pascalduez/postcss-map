@@ -34,12 +34,12 @@ export default postcss.plugin('postcss-map', opts => {
         resolve(data);
       });
     })
-    .then(function (data) {
-      let name = path.basename(map, path.extname(map));
-      maps[name] = yaml.safeLoad(data, {
-        filename: map,
+      .then(function (data) {
+        let name = path.basename(map, path.extname(map));
+        maps[name] = yaml.safeLoad(data, {
+          filename: map,
+        });
       });
-    });
   });
 
   return css => {
