@@ -6,6 +6,7 @@ import plugin from '../src';
 const read = name =>
   fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
 
+let from;
 let opts = {
   basePath: 'test/fixture',
   maps: [
@@ -23,7 +24,7 @@ test('value', async () => {
 
   const result = await postcss()
     .use(plugin(opts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -34,7 +35,7 @@ test('block', async () => {
 
   const result = await postcss()
     .use(plugin(opts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -45,7 +46,7 @@ test('atrule', async () => {
 
   const result = await postcss()
     .use(plugin(opts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -54,17 +55,19 @@ test('object', async () => {
   const input = read('object/input.css');
   const expected = read('object/expected.css');
   const localOpts = {
-    maps: [{
-      config: {
-        foo: 'foo value',
-        bar: 'bar value',
+    maps: [
+      {
+        config: {
+          foo: 'foo value',
+          bar: 'bar value',
+        },
       },
-    }],
+    ],
   };
 
   const result = await postcss()
     .use(plugin(localOpts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -74,21 +77,23 @@ test('object:custom', async () => {
   const expected = read('object-custom/expected.css');
   const localOpts = {
     defaultMap: 'custom',
-    maps: [{
-      custom: {
-        foo: 'custom foo value',
-        bar: 'custom bar value',
+    maps: [
+      {
+        custom: {
+          foo: 'custom foo value',
+          bar: 'custom bar value',
+        },
+        config: {
+          foo: 'config foo value',
+          bar: 'config bar value',
+        },
       },
-      config: {
-        foo: 'config foo value',
-        bar: 'config bar value',
-      },
-    }],
+    ],
   };
 
   const result = await postcss()
     .use(plugin(localOpts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -97,15 +102,17 @@ test('object:short', async () => {
   const input = read('object-short/input.css');
   const expected = read('object-short/expected.css');
   const localOpts = {
-    maps: [{
-      foo: 'foo value',
-      bar: 'bar value',
-    }],
+    maps: [
+      {
+        foo: 'foo value',
+        bar: 'bar value',
+      },
+    ],
   };
 
   const result = await postcss()
     .use(plugin(localOpts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -122,14 +129,14 @@ test('shortcut', async () => {
   // With `config`
   result = await postcss()
     .use(plugin(opts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 
   // With only one map.
   result = await postcss()
     .use(plugin(localOpts))
-    .process(input);
+    .process(input, { from });
 
   expect(result.css).toBe(expected);
 });
@@ -144,7 +151,7 @@ test('errors:path', async () => {
   try {
     await postcss()
       .use(plugin(localOpts))
-      .process(input);
+      .process(input, { from });
   } catch (ex) {
     expect(ex.code).toBe('ENOENT');
     expect(ex.toString()).toMatch(/blow.yml/);
@@ -161,7 +168,7 @@ test('errors:yaml', async () => {
   try {
     await postcss()
       .use(plugin(localOpts))
-      .process(input);
+      .process(input, { from });
   } catch (ex) {
     expect(ex.name).toBe('YAMLException');
     expect(ex.toString()).toMatch(/fail.yml/);

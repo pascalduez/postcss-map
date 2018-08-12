@@ -26,6 +26,9 @@
     "README.md",
     "UNLICENSE"
   ],
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "scripts": {
     "test": "jest",
     "watch:test": "jest --watch"
@@ -38,7 +41,7 @@
   },
   "dependencies": {
     "js-yaml": "^3.5.4",
-    "postcss": "^6.0.0",
+    "postcss": "^7.0.2",
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {

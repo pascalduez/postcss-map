@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased]
+### Changed
+  * Upgrade PostCSS to version 7.
+    **Breaking** Removes support for Node.js versions lower than 6.
 
 ## [0.9.0] - 2017-05-07
 ### Changed
