@@ -30,35 +30,29 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "test": "jest",
-    "watch:test": "jest --watch"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "collectCoverageFrom": [
-      "src/*.js"
-    ]
+    "lint": "eslint src/",
+    "test": "jest"
   },
   "dependencies": {
-    "js-yaml": "^3.5.4",
+    "js-yaml": "^3.12.0",
     "postcss": "^7.0.2",
     "reduce-function-call": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-object-assign": "^6.1.18",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.4.0",
-    "coveralls": "^2.13.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.2",
     "eslint": "^3.9.1",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^5.0.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "jest-cli": "^20.0.0",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "jest": "^23.5.0",
     "opn-cli": "^3.0.0",
-    "postcss-reporter": "^4.0.0"
+    "postcss-reporter": "^5.0.0"
   }
 }
