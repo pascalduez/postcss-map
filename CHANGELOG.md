@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased]
+
+## [0.10.0] - 2018-08-12
 ### Changed
   * Upgrade PostCSS to version 7.
     **Breaking** Removes support for Node.js versions lower than 6.
@@ -72,7 +74,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   * Initial release.
 
 
-[Unreleased]: https://github.com/pascalduez/postcss-map/compare/0.8.0...HEAD
+[Unreleased]: https://github.com/pascalduez/postcss-map/compare/0.10.0...HEAD
+[0.10.0]: https://github.com/pascalduez/postcss-map/compare/0.9.0...0.10.0
+[0.9.0]: https://github.com/pascalduez/postcss-map/compare/0.8.0...0.9.0
 [0.8.0]: https://github.com/pascalduez/postcss-map/compare/0.7.2...0.8.0
 [0.7.2]: https://github.com/pascalduez/postcss-map/compare/0.7.1...0.7.2
 [0.7.1]: https://github.com/pascalduez/postcss-map/compare/0.7.0...0.7.1

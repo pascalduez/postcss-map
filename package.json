@@ -1,6 +1,6 @@
 {
   "name": "postcss-map",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "PostCSS plugin enabling configuration maps",
   "keywords": [
     "css",
