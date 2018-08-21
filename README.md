@@ -4,9 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
-
 > [PostCSS] plugin enabling configuration maps.
-
 
 ## Installation
 
@@ -14,25 +12,30 @@
 npm install postcss-map --save-dev
 ```
 
+or
+
+```
+yarn add postcss-map --save-dev
+```
 
 ## Usage
 
 ```js
-var fs = require('fs');
-var postcss = require('postcss');
-var map = require('postcss-map');
+const fs = require('fs');
+const postcss = require('postcss');
+const map = require('postcss-map');
 
-var input = fs.readFileSync('input.css', 'utf8');
+let input = fs.readFileSync('input.css', 'utf8');
 
-var opts = {
-  basePath: 'css/',
-  maps: [ 'example.yml', 'breakpoints.yml', 'fonts.yml' ]
+let opts = {
+  basePath: 'css',
+  maps: ['example.yml', 'breakpoints.yml', 'fonts.yml'],
 };
 
 postcss()
   .use(map(opts))
   .process(input)
-  .then(function (result) {
+  .then(result => {
     fs.writeFileSync('output.css', result.css);
   });
 ```
@@ -40,6 +43,7 @@ postcss()
 ### Example usage from declaration values
 
 map:
+
 ```yaml
 # example.yml
 foo:
@@ -66,6 +70,7 @@ output:
 ### Example usage from at-rules parameters
 
 map:
+
 ```yaml
 # breakpoints.yml
 small: 320px
@@ -93,22 +98,22 @@ output:
 }
 ```
 
-
 ### Example from declaration blocks
 
 map:
+
 ```yaml
 # fonts.yml
 regular:
   font-family: "'Spinnaker Regular', sans-serif"
-  font-weight: "normal"
+  font-weight: 'normal'
   font-feature-settings: "'onum', 'kern', 'liga', 'dlig', 'clig'"
-  font-kerning: "normal"
+  font-kerning: 'normal'
 bold:
   font-family: "'Spinnaker Bold', sans-serif"
-  font-weight: "normal"
+  font-weight: 'normal'
   font-feature-settings: "'onum', 'kern', 'liga', 'dlig', 'clig'"
-  font-kerning: "normal"
+  font-kerning: 'normal'
 ```
 
 input:
@@ -133,16 +138,17 @@ output:
 ### Example usage with literal objects
 
 ```js
-var fs = require('fs');
-var postcss = require('postcss');
-var map = require('postcss-map');
+const fs = require('fs');
+const postcss = require('postcss');
+const map = require('postcss-map');
 
-var input = fs.readFileSync('input.css', 'utf8');
+let input = fs.readFileSync('input.css', 'utf8');
 
-var opts = {
-  basePath: 'css/',
+let opts = {
+  basePath: 'css',
   maps: [
-    { dummy: {
+    {
+      dummy: {
         one: 1,
         two: 2,
       },
@@ -156,7 +162,7 @@ var opts = {
 postcss()
   .use(map(opts))
   .process(input)
-  .then(function (result) {
+  .then(result => {
     fs.writeFileSync('output.css', result.css);
   });
 ```
@@ -167,6 +173,7 @@ input:
 .whatever {
   content: map(dummy, one);
 }
+
 .baz {
   content: map(example, foo, bar, baz);
 }
@@ -178,6 +185,7 @@ output:
 .whatever {
   content: 1;
 }
+
 .baz {
   content: 'yeah!';
 }
@@ -186,23 +194,25 @@ output:
 ### Example usage with literal objects and short syntax
 
 ```js
-var fs = require('fs');
-var postcss = require('postcss');
-var map = require('postcss-map');
+const fs = require('fs');
+const postcss = require('postcss');
+const map = require('postcss-map');
 
-var input = fs.readFileSync('input.css', 'utf8');
+let input = fs.readFileSync('input.css', 'utf8');
 
-var opts = {
-  maps: [{
-    one: 1,
-    two: 2,
-  }]
+let opts = {
+  maps: [
+    {
+      one: 1,
+      two: 2,
+    },
+  ],
 };
 
 postcss()
   .use(map(opts))
   .process(input)
-  .then(function (result) {
+  .then(result => {
     fs.writeFileSync('output.css', result.css);
   });
 ```
@@ -223,44 +233,47 @@ output:
 }
 ```
 
-
 ## Options
 
 ### basePath
+
 type: `String`  
 default: `process.cwd`  
 Base path to retrieve maps from.
 
 ### maps
+
 type: `Array`  
 default: `[]`  
 An array representing maps files to load and parse.
 Map files can either be in YAML or JSON format.  
 You can also pass literal objects directly into the Array.
 
-
 ### defaultMap (short syntax)
+
 type: `string`  
-default: `config`  
+default: `config`
 
 A shorter syntax is also available, so you don't have to type the map name on each call. To enable it you need to either have a map called `config` or only one map in your settings.
 
 ```js
-var opts = {
-  basePath: 'css/',
-  maps: [ 'foo.yml' ]
+let opts = {
+  basePath: 'css',
+  maps: ['foo.yml']
   // OR
-  maps: [ 'config.yml', 'breakpoints.yml' ]
+  maps: ['config.yml', 'breakpoints.yml']
 };
 ```
 
 map:
+
 ```yaml
 # config.yml
 foo: 'foo value'
 ```
 
 input:
+
 ```css
 .short {
   content: map(foo);
@@ -268,6 +281,7 @@ input:
 ```
 
 output:
+
 ```css
 .short {
   content: 'foo value';
@@ -287,23 +301,17 @@ maps and leverage the short syntax.
 }
 ```
 
-
 ## Credits
 
-* [Pascal Duez](https://github.com/pascalduez)
-* [Bogdan Chadkin](https://github.com/TrySound)
-
-
+- [Pascal Duez](https://github.com/pascalduez)
+- [Bogdan Chadkin](https://github.com/TrySound)
 
 ## Licence
 
 postcss-map is [unlicensed](http://unlicense.org/).
 
-
-
-[PostCSS]: https://github.com/postcss/postcss
+[postcss]: https://github.com/postcss/postcss
 [postcss-plugin-context]: https://github.com/postcss/postcss-plugin-context
-
 [npm-url]: https://www.npmjs.org/package/postcss-map
 [npm-image]: http://img.shields.io/npm/v/postcss-map.svg?style=flat-square
 [travis-url]: https://travis-ci.org/pascalduez/postcss-map?branch=master
