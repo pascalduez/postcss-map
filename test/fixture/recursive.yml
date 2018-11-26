@@ -1,0 +1,2 @@
+foo: map(dummy, foo)
+bar: map(recursive, foo)

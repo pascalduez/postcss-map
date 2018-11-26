@@ -15,12 +15,24 @@ let opts = {
     'breakpoints.yml',
     'assets.yml',
     'config.yml',
+    'recursive.yml',
   ],
 };
 
 test('value', async () => {
   const input = read('value/input.css');
   const expected = read('value/expected.css');
+
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input, { from });
+
+  expect(result.css).toBe(expected);
+});
+
+test('recursive', async () => {
+  const input = read('recursive/input.css');
+  const expected = read('recursive/expected.css');
 
   const result = await postcss()
     .use(plugin(opts))
