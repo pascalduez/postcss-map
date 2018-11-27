@@ -30,8 +30,10 @@
     "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "eslint src/",
-    "test": "ava"
+    "build": "babel ./src -d dist",
+    "lint": "eslint ./src ./test",
+    "test": "ava",
+    "cover": "nyc ava"
   },
   "dependencies": {
     "js-yaml": "^3.12.0",
@@ -52,7 +54,6 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "nyc": "^13.1.0",
-    "opn-cli": "^4.0.0",
     "postcss-reporter": "^6.0.0",
     "prettier": "^1.15.2"
   }
