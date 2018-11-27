@@ -21,10 +21,10 @@ lint:
 	eslint ./src ./test
 
 test: lint
-	jest
+	ava
 
 cover:
-	jest --coverage
+	nyc ava
 
 cover-browse: cover
 	opn ./coverage/lcov-report/index.html

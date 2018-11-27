@@ -1,7 +1,8 @@
+import test from 'ava';
 import fs from 'fs';
 import path from 'path';
 import postcss from 'postcss';
-import plugin from '../src';
+import plugin from '../dist';
 
 const pluginName = require('../package.json').name;
 let from;
@@ -12,28 +13,28 @@ const read = name =>
 const expected = read('control/expected.css');
 const input = read('control/input.css');
 
-test('control: no options', () =>
+test('control: no options', t =>
   postcss([plugin])
     .process(input, { from })
     .then(result => {
-      expect(result.css).toBe(expected);
+      t.is(result.css, expected);
     }));
 
-test('control: with options', () =>
+test('control: with options', t =>
   postcss([plugin({})])
     .process(input, { from })
     .then(result => {
-      expect(result.css).toBe(expected);
+      t.is(result.css, expected);
     }));
 
-test('control: PostCSS API', async () => {
+test('control: PostCSS API', async t => {
   const processor = postcss();
   processor.use(plugin);
 
   const result = await processor.process(input, { from });
 
-  expect(result.css).toBe(expected);
+  t.is(result.css, expected);
 
-  expect(processor.plugins[0].postcssPlugin).toBe(pluginName);
-  expect(processor.plugins[0].postcssVersion).toBeDefined();
+  t.is(processor.plugins[0].postcssPlugin, pluginName);
+  t.truthy(processor.plugins[0].postcssVersion);
 });
