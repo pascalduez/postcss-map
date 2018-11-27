@@ -1,7 +1,7 @@
 import { list } from 'postcss';
 import rfc from 'reduce-function-call';
 
-const reMap = /((?:map)\()(.*)(\))/;
+const reMap = /map\(.*\)/;
 
 export default class Visitor {
   constructor(opts = {}, maps = {}) {
@@ -14,13 +14,11 @@ export default class Visitor {
    * @param {Object} decl
    */
   processDecl(decl) {
-    if (!reMap.test(decl.value)) {
-      return;
-    }
+    if (!reMap.test(decl.value)) return;
 
-    decl.value = rfc(decl.value, 'map', body => {
-      return this.getValue(list.comma(body));
-    });
+    decl.value = rfc(decl.value, 'map', body =>
+      this.getValue(list.comma(body))
+    );
   }
 
   /**
@@ -28,12 +26,8 @@ export default class Visitor {
    * @param {Object} rule
    */
   processAtRule(rule) {
-    if (rule.name === 'map') {
-      return this.replaceAtRuleBlock(rule);
-    }
-    if (reMap.test(rule.params)) {
-      return this.replaceAtRuleParam(rule);
-    }
+    if (rule.name === 'map') return this.replaceAtRuleBlock(rule);
+    if (reMap.test(rule.params)) return this.replaceAtRuleParam(rule);
   }
 
   /**
@@ -43,9 +37,9 @@ export default class Visitor {
   replaceAtRuleBlock(rule) {
     let map = this.getValue(list.space(rule.params));
 
-    Object.keys(map).forEach(prop => {
-      rule.parent.insertBefore(rule, { prop, value: map[prop] });
-    });
+    Object.keys(map).forEach(prop =>
+      rule.parent.insertBefore(rule, { prop, value: map[prop] })
+    );
 
     rule.remove();
   }
@@ -55,9 +49,9 @@ export default class Visitor {
    * @param {Object} rule
    */
   replaceAtRuleParam(rule) {
-    rule.params = rfc(rule.params, 'map', body => {
-      return this.getValue(list.comma(body));
-    });
+    rule.params = rfc(rule.params, 'map', body =>
+      this.getValue(list.comma(body))
+    );
   }
 
   /**
@@ -74,7 +68,7 @@ export default class Visitor {
       props = args;
     }
 
-    return props.reduce((acc, prop) => acc[prop], this.maps[name]);
+    return props.reduce((map, prop) => map[prop], this.maps[name]);
   }
 
   /**
@@ -83,15 +77,10 @@ export default class Visitor {
    * @return {Boolean|String}
    */
   useShortcutMap(name) {
-    if (name in this.maps) {
-      return false;
-    }
-    if (this.opts.defaultMap in this.maps) {
-      return this.opts.defaultMap;
-    }
+    if (name in this.maps) return false;
+    if (this.opts.defaultMap in this.maps) return this.opts.defaultMap;
+
     let names = Object.keys(this.maps);
-    if (names.length === 1) {
-      return names[0];
-    }
+    if (names.length === 1) return names[0];
   }
 }

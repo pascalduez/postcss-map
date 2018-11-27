@@ -1,24 +1,25 @@
 import path from 'path';
-import { readFile } from 'fs';
+import fs from 'fs';
+import { promisify } from 'util';
 import postcss from 'postcss';
 import yaml from 'js-yaml';
 import Visitor from './visitor';
 
+const readFile = promisify(fs.readFile);
+
 export default postcss.plugin('postcss-map', opts => {
-  opts = Object.assign(
-    {
-      maps: [],
-      basePath: process.cwd(),
-      defaultMap: 'config',
-    },
-    opts
-  );
+  opts = {
+    maps: [],
+    basePath: process.cwd(),
+    defaultMap: 'config',
+    ...opts,
+  };
 
   let filtered = [];
   let maps = Object.create(null);
   let paths = opts.maps
     .filter(map => {
-      if (typeof map === 'string' && filtered.indexOf(map) === -1) {
+      if (typeof map === 'string' && !filtered.includes(map)) {
         filtered.push(map);
         return true;
       }
@@ -30,19 +31,11 @@ export default postcss.plugin('postcss-map', opts => {
       return path.resolve(opts.basePath, map);
     });
 
-  let promises = paths.map(map => {
-    return new Promise((resolve, reject) => {
-      readFile(map, 'utf-8', (err, data) => {
-        if (err) {
-          return reject(err);
-        }
-        resolve(data);
-      });
-    }).then(function(data) {
-      let name = path.basename(map, path.extname(map));
-      maps[name] = yaml.safeLoad(data, {
-        filename: map,
-      });
+  let promises = paths.map(async map => {
+    let name = path.basename(map, path.extname(map));
+    let data = await readFile(map, 'utf-8');
+    maps[name] = yaml.safeLoad(data, {
+      filename: map,
     });
   });
 
@@ -51,11 +44,12 @@ export default postcss.plugin('postcss-map', opts => {
       const visitor = new Visitor(opts, maps);
 
       css.walk(node => {
-        if (node.type === 'decl') {
-          return visitor.processDecl(node);
-        }
-        if (node.type === 'atrule') {
-          return visitor.processAtRule(node);
+        switch (node.type) {
+          case 'decl':
+            return visitor.processDecl(node);
+
+          case 'atrule':
+            return visitor.processAtRule(node);
         }
       });
     });
