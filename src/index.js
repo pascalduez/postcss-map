@@ -5,25 +5,30 @@ import yaml from 'js-yaml';
 import Visitor from './visitor';
 
 export default postcss.plugin('postcss-map', opts => {
-  opts = Object.assign({
-    maps: [],
-    basePath: process.cwd(),
-    defaultMap: 'config',
-  }, opts);
+  opts = Object.assign(
+    {
+      maps: [],
+      basePath: process.cwd(),
+      defaultMap: 'config',
+    },
+    opts
+  );
 
   let filtered = [];
   let maps = Object.create(null);
-  let paths = opts.maps.filter(map => {
-    if (typeof map === 'string' && filtered.indexOf(map) === -1) {
-      filtered.push(map);
-      return true;
-    }
-    if (typeof map === 'object') {
-      Object.assign(maps, map);
-    }
-  }).map(map => {
-    return path.resolve(opts.basePath, map);
-  });
+  let paths = opts.maps
+    .filter(map => {
+      if (typeof map === 'string' && filtered.indexOf(map) === -1) {
+        filtered.push(map);
+        return true;
+      }
+      if (typeof map === 'object') {
+        Object.assign(maps, map);
+      }
+    })
+    .map(map => {
+      return path.resolve(opts.basePath, map);
+    });
 
   let promises = paths.map(map => {
     return new Promise((resolve, reject) => {
@@ -33,13 +38,12 @@ export default postcss.plugin('postcss-map', opts => {
         }
         resolve(data);
       });
-    })
-      .then(function (data) {
-        let name = path.basename(map, path.extname(map));
-        maps[name] = yaml.safeLoad(data, {
-          filename: map,
-        });
+    }).then(function(data) {
+      let name = path.basename(map, path.extname(map));
+      maps[name] = yaml.safeLoad(data, {
+        filename: map,
       });
+    });
   });
 
   return css => {

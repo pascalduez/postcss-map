@@ -74,7 +74,7 @@ export default class Visitor {
       props = args;
     }
 
-    return props.reduce((acc, prop) => (acc[prop]), this.maps[name]);
+    return props.reduce((acc, prop) => acc[prop], this.maps[name]);
   }
 
   /**

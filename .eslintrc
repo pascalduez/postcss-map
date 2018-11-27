@@ -1,15 +1,14 @@
 ---
-parser: "babel-eslint"
-extends: "standard"
+extends: standard
 root: true
 env:
   jest: true
 
 rules:
-  semi: [2, "always"]
-  comma-dangle: [2, "always-multiline"]
-  space-before-function-paren: [2, {
-    "anonymous": "always",
-    "named": "never" }]
-  # https://github.com/eslint/eslint/issues/7101
-  arrow-parens: off
+  semi: [error, always]
+  comma-dangle: [error, always-multiline]
+  space-before-function-paren: [error, {
+    anonymous: never,
+    named: never,
+    asyncArrow: always
+  }]
