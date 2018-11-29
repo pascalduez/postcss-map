@@ -1,3 +1,6 @@
+:root {
+  --foo: foo value;
+}
 .foo--short {
-  content: foo value;
+  content: var(--foo);
 }

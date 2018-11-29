@@ -1,13 +1,18 @@
-@media screen and (min-width: 321px) {
+:root {
+  --breakpoints-medium: 321px;
+  --breakpoints-large: 800px;
+}
+
+@media screen and (min-width: var(--breakpoints-medium)) {
   .test {
     width: 100%;
   }
 }
 
-@media (min-width: 321px) and (max-width: 800px) {
+@media (min-width: var(--breakpoints-medium)) and (max-width: var(--breakpoints-large)) {
   .test {
     width: 100%;
   }
 }
 
-@custom-media --foo (width >= 321px) and (width <= 800px);
+@custom-media --foo (width >= var(--breakpoints-medium)) and (width <= var(--breakpoints-large));

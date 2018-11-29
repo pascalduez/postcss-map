@@ -1,7 +1,12 @@
-.short {
-  content: foo value;
+:root {
+  --dummy-foo: foo value;
+  --dummy-one-two-three: yeah!;
 }
 
 .short {
-  content: yeah!;
+  content: var(--dummy-foo);
+}
+
+.short {
+  content: var(--dummy-one-two-three);
 }

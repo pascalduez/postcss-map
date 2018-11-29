@@ -12,6 +12,7 @@ export default postcss.plugin('postcss-map', opts => {
     maps: [],
     basePath: process.cwd(),
     defaultMap: 'config',
+    inlcudeUnused: false,
     ...opts,
   };
 
@@ -41,6 +42,9 @@ export default postcss.plugin('postcss-map', opts => {
 
   return css => {
     return Promise.all(promises).then(() => {
+      const variables = Object.entries(listProperties(maps));
+      if (variables.length === 0) return;
+
       const visitor = new Visitor(opts, maps);
 
       css.walk(node => {
@@ -52,6 +56,38 @@ export default postcss.plugin('postcss-map', opts => {
             return visitor.processAtRule(node);
         }
       });
+
+      const used = visitor.getUsedVariables();
+      const nodes = variables.reduce((arr, [prop, value]) => {
+        if (!opts.includeUnused && !used.has(prop)) return arr;
+
+        arr.push(
+          postcss.decl({
+            prop: '--' + prop,
+            value,
+            raws: { before: '\n  ', after: '\n' },
+          })
+        );
+        return arr;
+      }, []);
+
+      css.prepend(postcss.rule({ selector: ':root', nodes }));
     });
   };
 });
+
+function listProperties(obj) {
+  let properties = Object.create(null);
+
+  for (let [key, subobj] of Object.entries(obj)) {
+    if (subobj instanceof Object) {
+      for (let [piece, value] of Object.entries(listProperties(subobj))) {
+        properties[`${key}-${piece}`] = value;
+      }
+    } else {
+      properties[key] = subobj;
+    }
+  }
+
+  return properties;
+}

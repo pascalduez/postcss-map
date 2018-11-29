@@ -1,6 +1,9 @@
+:root {
+  --custom-foo: custom foo value;
+}
 .foo {
-  content: custom foo value;
+  content: var(--custom-foo);
 }
 .foo--short {
-  content: custom foo value;
+  content: var(--custom-foo);
 }

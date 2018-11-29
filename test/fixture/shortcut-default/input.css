@@ -1,0 +1,7 @@
+.short {
+  content: map(foo);
+}
+
+.short {
+  content: map(one, two, three);
+}

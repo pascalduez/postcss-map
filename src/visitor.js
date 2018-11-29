@@ -7,6 +7,7 @@ export default class Visitor {
   constructor(opts = {}, maps = {}) {
     this.opts = opts;
     this.maps = maps;
+    this.usedVariables = new Set();
   }
 
   /**
@@ -35,11 +36,16 @@ export default class Visitor {
    * @param {Object} rule
    */
   replaceAtRuleBlock(rule) {
-    let map = this.getValue(list.space(rule.params));
-
-    Object.keys(map).forEach(prop =>
-      rule.parent.insertBefore(rule, { prop, value: map[prop] })
-    );
+    let normalized = this.normalize(list.space(rule.params));
+    let properties = normalized.reduce((map, prop) => map[prop], this.maps);
+    Object.keys(properties).forEach(prop => {
+      let variable = `${normalized.join('-')}-${prop}`;
+      this.usedVariables.add(variable);
+      rule.parent.insertBefore(rule, {
+        prop,
+        value: `var(--${variable})`,
+      });
+    });
 
     rule.remove();
   }
@@ -60,27 +66,32 @@ export default class Visitor {
    * @return {*}
    */
   getValue(args) {
-    let [name, ...props] = args;
-    let shortcutMap = this.useShortcutMap(name);
-
-    if (shortcutMap) {
-      name = shortcutMap;
-      props = args;
-    }
-
-    return props.reduce((map, prop) => map[prop], this.maps[name]);
+    let normalized = this.normalize(args);
+    let variable = normalized.join('-');
+    this.usedVariables.add(variable);
+    return `var(--${variable})`;
   }
 
   /**
-   * Get map name usable with the short syntax.
-   * @param {String} name
-   * @return {Boolean|String}
+   * Normalize map path taking into account short syntax.
+   * @param {Array} args
+   * @return {Array}
    */
-  useShortcutMap(name) {
-    if (name in this.maps) return false;
-    if (this.opts.defaultMap in this.maps) return this.opts.defaultMap;
+  normalize(args) {
+    if (args[0] in this.maps) return args;
+    if (this.opts.defaultMap in this.maps) {
+      return [this.opts.defaultMap, ...args];
+    }
 
     let names = Object.keys(this.maps);
-    if (names.length === 1) return names[0];
+    if (names.length === 1) return [names[0], ...args];
+  }
+
+  /**
+   * Returns a `Set` of all variables used by the processed css.
+   * @return {Set}
+   */
+  getUsedVariables() {
+    return this.usedVariables;
   }
 }

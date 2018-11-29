@@ -1,0 +1,12 @@
+:root {
+  --config-foo: foo value;
+  --config-one-two-three: yeah!;
+}
+
+.short {
+  content: var(--config-foo);
+}
+
+.short {
+  content: var(--config-one-two-three);
+}

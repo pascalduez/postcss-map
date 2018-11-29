@@ -1,6 +1,9 @@
+:root {
+  --config-foo: foo value;
+}
 .foo {
-  content: foo value;
+  content: var(--config-foo);
 }
 .foo--short {
-  content: foo value;
+  content: var(--config-foo);
 }

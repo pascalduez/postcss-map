@@ -1,9 +1,15 @@
+:root {
+  --dummy-foo: foo value;
+  --assets-upper: ../assets/img/upper.png;
+  --assets-between: ../assets/img/between.png;
+  --assets-under: ../assets/img/under.png;
+}
+
 .foo {
-  content: foo value;
+  content: var(--dummy-foo);
 }
 
 .bar {
-  background-image: url(../assets/img/upper.png),
-                    url(../assets/img/between.png),
-                    url(../assets/img/under.png);
+  background-image: url(var(--assets-upper)), url(var(--assets-between)),
+    url(var(--assets-under));
 }

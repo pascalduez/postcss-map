@@ -121,22 +121,44 @@ test('object:short', async t => {
 test('shortcut', async t => {
   const input = read('shortcut/input.css');
   const expected = read('shortcut/expected.css');
-  const localOpts = {
-    ...opts,
-    maps: ['dummy.yml'],
-  };
-  let result;
+
+  // With only one map.
+  let result = await postcss()
+    .use(
+      plugin({
+        ...opts,
+        maps: ['dummy.yml'],
+      })
+    )
+    .process(input, { from });
+
+  t.is(result.css, expected);
+});
+
+test('shortcut:default', async t => {
+  const input = read('shortcut-default/input.css');
+  const expected = read('shortcut-default/expected.css');
 
   // With `config`
-  result = await postcss()
+  let result = await postcss()
     .use(plugin(opts))
     .process(input, { from });
 
   t.is(result.css, expected);
+});
 
-  // With only one map.
-  result = await postcss()
-    .use(plugin(localOpts))
+test('includeUnused', async t => {
+  const input = read('include-unused/input.css');
+  const expected = read('include-unused/expected.css');
+
+  const result = await postcss()
+    .use(
+      plugin({
+        ...opts,
+        includeUnused: true,
+        maps: ['dummy.yml', 'breakpoints.yml'],
+      })
+    )
     .process(input, { from });
 
   t.is(result.css, expected);

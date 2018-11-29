@@ -1,5 +1,10 @@
+:root {
+  --fonts-code-Regular-font-family: 'CamingoCode Regular', nonospace;
+  --fonts-code-Regular-font-weight: normal;
+  --fonts-code-Regular-font-feature-settings: zero;
+}
 .fonts {
-  font-family: 'CamingoCode Regular', nonospace;
-  font-weight: normal;
-  font-feature-settings: zero;
+  font-family: var(--fonts-code-Regular-font-family);
+  font-weight: var(--fonts-code-Regular-font-weight);
+  font-feature-settings: var(--fonts-code-Regular-font-feature-settings);
 }

@@ -4,7 +4,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
 
-> [PostCSS] plugin enabling configuration maps.
+> [PostCSS] plugin enabling configuration maps that translate into custom properties.
 
 ## Installation
 
@@ -62,8 +62,12 @@ input:
 output:
 
 ```css
+:root {
+  --example-foo-bar-baz: yeah!;
+}
+
 .baz {
-  content: 'yeah!';
+  content: var(--example-foo-bar-baz);
 }
 ```
 
@@ -91,7 +95,11 @@ input:
 output:
 
 ```css
-@media (min-width: 321px) {
+:root {
+  --breakpoints-medium: 321px;
+}
+
+@media (min-width: var(--breakpoints-medium)) {
   .test {
     width: 100%;
   }
@@ -127,11 +135,18 @@ input:
 output:
 
 ```css
+:root {
+  --fonts-regular-font-family: 'Spinnaker Regular', sans-serif;
+  --fonts-regular-font-weight: normal;
+  --fonts-regular-font-feature-settings: 'onum', 'kern', 'liga', 'dlig', 'clig';
+  --fonts-regular-font-kerning: normal;
+}
+
 .whatever {
-  font-family: 'Spinnaker Bold', sans-serif;
-  font-weight: normal;
-  font-feature-settings: 'onum', 'kern', 'liga', 'dlig', 'clig';
-  font-kerning: normal;
+  font-family: var(--fonts-regular-font-family);
+  font-weight: var(--fonts-regular-font-weight);
+  font-feature-settings: var(--fonts-regular-font-feature-settings);
+  font-kerning: var(--fonts-regular-font-kerning);
 }
 ```
 
@@ -182,12 +197,17 @@ input:
 output:
 
 ```css
+:root {
+  --dummy-one: 1;
+  --example-foo-bar-baz: yeah!;
+}
+
 .whatever {
-  content: 1;
+  content: var(--dummy-one);
 }
 
 .baz {
-  content: 'yeah!';
+  content: var(--example-foo-bar-baz);
 }
 ```
 
@@ -228,8 +248,12 @@ input:
 output:
 
 ```css
+:root {
+  --one: 1;
+}
+
 .whatever {
-  content: 1;
+  content: var(--one);
 }
 ```
 
@@ -240,6 +264,12 @@ output:
 type: `String`  
 default: `process.cwd`  
 Base path to retrieve maps from.
+
+### includeUnused
+
+type: `boolean`  
+default: `false`  
+If true output custom properties for all map variables not only ones referenced in the markup.
 
 ### maps
 
