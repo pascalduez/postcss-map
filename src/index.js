@@ -3,6 +3,7 @@ import fs from 'fs';
 import { promisify } from 'util';
 import postcss from 'postcss';
 import yaml from 'js-yaml';
+import glob from 'tiny-glob';
 import Visitor from './visitor';
 
 const readFile = promisify(fs.readFile);
@@ -16,30 +17,33 @@ export default postcss.plugin('postcss-map', opts => {
     ...opts,
   };
 
-  let filtered = [];
-  let maps = Object.create(null);
-  let paths = opts.maps
-    .filter(map => {
-      if (typeof map === 'string' && !filtered.includes(map)) {
-        filtered.push(map);
-        return true;
-      }
-      if (typeof map === 'object') {
-        Object.assign(maps, map);
-      }
-    })
-    .map(map => {
-      return path.resolve(opts.basePath, map);
+  const filesSet = new Set();
+  const maps = Object.create(null);
+  const promises = opts.maps.map(async map => {
+    if (typeof map === 'object') {
+      Object.assign(maps, map);
+      return;
+    }
+
+    const files = await glob(map, {
+      cwd: opts.basePath || '.',
+      filesOnly: true,
+      absolute: true,
     });
 
-  let promises = paths.map(async filename => {
-    let ext = path.extname(filename);
-    let name = path.basename(filename, ext);
-    if (ext === '.js' || ext === '.mjs') {
-      maps[name] = (await import(filename)).default;
-    } else {
-      let data = await readFile(filename, 'utf-8');
-      maps[name] = yaml.safeLoad(data, { filename });
+    for (const filename of files) {
+      if (filesSet.has(filename)) continue;
+
+      filesSet.add(filename);
+
+      let ext = path.extname(filename);
+      let name = path.basename(filename, ext);
+      if (ext === '.js' || ext === '.mjs') {
+        maps[name] = (await import(filename)).default;
+      } else {
+        let data = await readFile(filename, 'utf-8');
+        maps[name] = yaml.safeLoad(data, { filename });
+      }
     }
   });
 

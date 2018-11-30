@@ -1,0 +1,8 @@
+.foo {
+  content: map(dummy, foo);
+}
+
+.bar {
+  background-image: url(map(assets, upper)), url(map(assets, between)),
+    url(map(assets, under));
+}

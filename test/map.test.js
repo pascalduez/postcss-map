@@ -32,6 +32,22 @@ test('value', async t => {
   t.is(result.css, expected);
 });
 
+test('glob', async t => {
+  const input = read('glob/input.css');
+  const expected = read('glob/expected.css');
+
+  const result = await postcss()
+    .use(
+      plugin({
+        basePath: 'test/fixture',
+        maps: ['{dummy,assets}.yml'],
+      })
+    )
+    .process(input, { from });
+
+  t.is(result.css, expected);
+});
+
 test('javascript', async t => {
   const input = read('javascript/input.css');
   const expected = read('javascript/expected.css');
