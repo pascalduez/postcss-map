@@ -32,12 +32,15 @@ export default postcss.plugin('postcss-map', opts => {
       return path.resolve(opts.basePath, map);
     });
 
-  let promises = paths.map(async map => {
-    let name = path.basename(map, path.extname(map));
-    let data = await readFile(map, 'utf-8');
-    maps[name] = yaml.safeLoad(data, {
-      filename: map,
-    });
+  let promises = paths.map(async filename => {
+    let ext = path.extname(filename);
+    let name = path.basename(filename, ext);
+    if (ext === '.js' || ext === '.mjs') {
+      maps[name] = (await import(filename)).default;
+    } else {
+      let data = await readFile(filename, 'utf-8');
+      maps[name] = yaml.safeLoad(data, { filename });
+    }
   });
 
   return css => {

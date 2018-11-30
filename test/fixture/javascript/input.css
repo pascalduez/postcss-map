@@ -1,0 +1,7 @@
+.foo {
+  content: map(javascript, foo);
+}
+
+.bar {
+  content: map(javascript, one, two, three);
+}

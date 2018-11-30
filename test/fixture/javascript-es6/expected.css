@@ -1,0 +1,12 @@
+:root {
+  --javascript-es6-foo: foo value;
+  --javascript-es6-one-two-three: yeah!;
+}
+
+.foo {
+  content: var(--javascript-es6-foo);
+}
+
+.bar {
+  content: var(--javascript-es6-one-two-three);
+}

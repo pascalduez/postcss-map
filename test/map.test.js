@@ -2,7 +2,7 @@ import test from 'ava';
 import fs from 'fs';
 import path from 'path';
 import postcss from 'postcss';
-import plugin from '../dist';
+import plugin from '../src';
 
 const read = name =>
   fs.readFileSync(path.join(__dirname, 'fixture', name), 'utf8');
@@ -16,12 +16,36 @@ let opts = {
     'breakpoints.yml',
     'assets.yml',
     'config.yml',
+    'javascript.js',
+    'javascript-es6.mjs',
   ],
 };
 
 test('value', async t => {
   const input = read('value/input.css');
   const expected = read('value/expected.css');
+
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input, { from });
+
+  t.is(result.css, expected);
+});
+
+test('javascript', async t => {
+  const input = read('javascript/input.css');
+  const expected = read('javascript/expected.css');
+
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input, { from });
+
+  t.is(result.css, expected);
+});
+
+test('javascript:es6', async t => {
+  const input = read('javascript-es6/input.css');
+  const expected = read('javascript-es6/expected.css');
 
   const result = await postcss()
     .use(plugin(opts))

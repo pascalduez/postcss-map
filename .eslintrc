@@ -1,4 +1,4 @@
----
+parser: babel-eslint
 extends: standard
 root: true
 env:

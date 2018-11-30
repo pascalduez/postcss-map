@@ -1,0 +1,12 @@
+:root {
+  --javascript-foo: foo value;
+  --javascript-one-two-three: yeah!;
+}
+
+.foo {
+  content: var(--javascript-foo);
+}
+
+.bar {
+  content: var(--javascript-one-two-three);
+}

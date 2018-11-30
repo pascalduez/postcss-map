@@ -1,0 +1,7 @@
+.foo {
+  content: map(javascript-es6, foo);
+}
+
+.bar {
+  content: map(javascript-es6, one, two, three);
+}
