@@ -19,41 +19,40 @@ export default postcss.plugin('postcss-map', opts => {
 
   const filesSet = new Set();
   const maps = Object.create(null);
+  const promises = opts.maps.map(async map => {
+    if (typeof map === 'object') {
+      Object.assign(maps, map);
+      return;
+    }
 
-  return async (css, result) => {
-    await Promise.all(
-      opts.maps.map(async map => {
-        if (typeof map === 'object') {
-          Object.assign(maps, map);
-          return;
-        }
+    const files = await glob(map, {
+      cwd: opts.basePath || '.',
+      filesOnly: true,
+      absolute: true,
+    });
 
-        const files = await glob(map, {
-          cwd: opts.basePath || '.',
-          filesOnly: true,
-          absolute: true,
-        });
+    if (files.length === 0) {
+      throw new Error(`Could not find map file '${map}'.`);
+    }
 
-        if (files.length === 0) {
-          result.warn(`Could not find map file '${map}'.`);
-        }
+    for (const filename of files) {
+      if (filesSet.has(filename)) continue;
 
-        for (const filename of files) {
-          if (filesSet.has(filename)) continue;
+      filesSet.add(filename);
 
-          filesSet.add(filename);
+      let ext = path.extname(filename);
+      let name = path.basename(filename, ext);
+      if (ext === '.js' || ext === '.mjs') {
+        maps[name] = (await import(filename)).default;
+      } else {
+        let data = await readFile(filename, 'utf-8');
+        maps[name] = yaml.safeLoad(data, { filename });
+      }
+    }
+  });
 
-          let ext = path.extname(filename);
-          let name = path.basename(filename, ext);
-          if (ext === '.js' || ext === '.mjs') {
-            maps[name] = (await import(filename)).default;
-          } else {
-            let data = await readFile(filename, 'utf-8');
-            maps[name] = yaml.safeLoad(data, { filename });
-          }
-        }
-      })
-    );
+  return async css => {
+    await Promise.all(promises);
 
     const variables = listProperties(maps);
 

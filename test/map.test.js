@@ -204,17 +204,20 @@ test('includeUnused', async t => {
   t.is(result.css, expected);
 });
 
-test('warn:path', async t => {
+test('error:path', async t => {
   const input = read('atrule/input.css');
   const localOpts = {
     ...opts,
     maps: [...opts.maps, 'blow.yml'],
   };
 
-  const result = await postcss()
-    .use(plugin(localOpts))
-    .process(input, { from });
-  t.is(result.messages[0].text, "Could not find map file 'blow.yml'.");
+  try {
+    const result = await postcss()
+      .use(plugin(localOpts))
+      .process(input, { from });
+  } catch (err) {
+    t.is(err.message, "Could not find map file 'blow.yml'.");
+  }
 });
 
 test('errors:yaml', async t => {
