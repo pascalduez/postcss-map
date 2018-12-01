@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.11.0] - 2018-12-01
+### Added
+  * Added ability to recursively resolve map values.
+    ([#113](https://github.com/pascalduez/postcss-map/pull/133))
+
 ## [0.10.0] - 2018-08-12
 ### Changed
   * Upgrade PostCSS to version 7.
