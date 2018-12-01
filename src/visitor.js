@@ -74,7 +74,15 @@ export default class Visitor {
       props = args;
     }
 
-    return props.reduce((acc, prop) => (acc[prop]), this.maps[name]);
+    let value = props.reduce((acc, prop) => (acc[prop]), this.maps[name]);
+
+    if (!reMap.test(value)) {
+      return value;
+    }
+
+    return rfc(value, 'map', body => {
+      return this.getValue(list.comma(body));
+    });
   }
 
   /**
