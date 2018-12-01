@@ -204,21 +204,17 @@ test('includeUnused', async t => {
   t.is(result.css, expected);
 });
 
-test('errors:path', async t => {
+test('warn:path', async t => {
   const input = read('atrule/input.css');
   const localOpts = {
     ...opts,
     maps: [...opts.maps, 'blow.yml'],
   };
 
-  try {
-    await postcss()
-      .use(plugin(localOpts))
-      .process(input, { from });
-  } catch (ex) {
-    t.is(ex.code, 'ENOENT');
-    t.regex(ex.toString(), /blow.yml/);
-  }
+  const result = await postcss()
+    .use(plugin(localOpts))
+    .process(input, { from });
+  t.is(result.messages[0].text, "Could not find map file 'blow.yml'.");
 });
 
 test('errors:yaml', async t => {
@@ -232,8 +228,33 @@ test('errors:yaml', async t => {
     await postcss()
       .use(plugin(localOpts))
       .process(input, { from });
+    t.fail('Should have thrown');
   } catch (ex) {
     t.is(ex.name, 'YAMLException');
     t.regex(ex.toString(), /fail.yml/);
+  }
+});
+
+test('errors:block', async t => {
+  const input = read('block/input.css');
+  try {
+    await postcss()
+      .use(plugin({}))
+      .process(input, { from });
+    t.fail('Should have thrown');
+  } catch (err) {
+    t.is(err.reason, "Could not find map block 'fonts.code.Regular'.");
+  }
+});
+
+test('errors:value', async t => {
+  const input = read('value/input.css');
+  try {
+    await postcss()
+      .use(plugin({}))
+      .process(input, { from });
+    t.fail('Should have thrown');
+  } catch (err) {
+    t.is(err.reason, "Could not find map value 'dummy.foo'.");
   }
 });

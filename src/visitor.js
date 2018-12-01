@@ -4,9 +4,10 @@ import rfc from 'reduce-function-call';
 const reMap = /map\(.*\)/;
 
 export default class Visitor {
-  constructor(opts = {}, maps = {}) {
+  constructor(opts = {}, maps = {}, variables = {}) {
     this.opts = opts;
     this.maps = maps;
+    this.variables = variables;
     this.usedVariables = new Set();
   }
 
@@ -18,7 +19,7 @@ export default class Visitor {
     if (!reMap.test(decl.value)) return;
 
     decl.value = rfc(decl.value, 'map', body =>
-      this.getValue(list.comma(body))
+      this.getValue(list.comma(body), decl)
     );
   }
 
@@ -37,7 +38,13 @@ export default class Visitor {
    */
   replaceAtRuleBlock(rule) {
     let normalized = this.normalize(list.space(rule.params));
-    let properties = normalized.reduce((map, prop) => map[prop], this.maps);
+    let properties = normalized.reduce((map, prop) => {
+      if (!(prop in map)) {
+        throw rule.error(`Could not find map block '${normalized.join('.')}'.`);
+      }
+
+      return map[prop];
+    }, this.maps);
     Object.keys(properties).forEach(prop => {
       let variable = `${normalized.join('-')}-${prop}`;
       this.usedVariables.add(variable);
@@ -56,7 +63,7 @@ export default class Visitor {
    */
   replaceAtRuleParam(rule) {
     rule.params = rfc(rule.params, 'map', body =>
-      this.getValue(list.comma(body))
+      this.getValue(list.comma(body), rule)
     );
   }
 
@@ -65,9 +72,14 @@ export default class Visitor {
    * @param {Array} args
    * @return {*}
    */
-  getValue(args) {
+  getValue(args, node) {
     let normalized = this.normalize(args);
     let variable = normalized.join('-');
+
+    if (!this.variables.includes(variable)) {
+      throw node.error(`Could not find map value '${normalized.join('.')}'.`);
+    }
+
     this.usedVariables.add(variable);
     return `var(--${variable})`;
   }
@@ -85,6 +97,8 @@ export default class Visitor {
 
     let names = Object.keys(this.maps);
     if (names.length === 1) return [names[0], ...args];
+
+    return args;
   }
 
   /**
