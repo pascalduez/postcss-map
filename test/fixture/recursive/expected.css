@@ -1,0 +1,13 @@
+:root {
+  --dummy-foo: foo value;
+  --recursive-foo: var(--dummy-foo);
+  --recursive-bar: var(--recursive-foo);
+}
+
+.foo {
+  content: var(--recursive-foo);
+}
+
+.bar {
+  content: var(--recursive-bar);
+}

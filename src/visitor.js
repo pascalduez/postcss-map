@@ -1,14 +1,15 @@
 import { list } from 'postcss';
 import rfc from 'reduce-function-call';
+import postcss from 'postcss';
 
 const reMap = /map\(.*\)/;
 
 export default class Visitor {
-  constructor(opts = {}, maps = {}, variables = {}) {
+  constructor(opts = {}, maps = {}) {
     this.opts = opts;
     this.maps = maps;
-    this.variables = variables;
-    this.usedVariables = new Set();
+    this.variables = this.listProperties(maps);
+    this.declarations = Object.create(null);
   }
 
   /**
@@ -45,14 +46,13 @@ export default class Visitor {
 
       return map[prop];
     }, this.maps);
-    Object.keys(properties).forEach(prop => {
-      let variable = `${normalized.join('-')}-${prop}`;
-      this.usedVariables.add(variable);
+
+    Object.keys(properties).forEach(prop =>
       rule.parent.insertBefore(rule, {
         prop,
-        value: `var(--${variable})`,
-      });
-    });
+        value: this.getValue([...normalized, prop]),
+      })
+    );
 
     rule.remove();
   }
@@ -76,12 +76,25 @@ export default class Visitor {
     let normalized = this.normalize(args);
     let variable = normalized.join('-');
 
-    if (!this.variables.includes(variable)) {
+    if (!(variable in this.variables)) {
       throw node.error(`Could not find map value '${normalized.join('.')}'.`);
     }
 
-    this.usedVariables.add(variable);
+    this.createDeclaration(variable);
+
     return `var(--${variable})`;
+  }
+
+  createDeclaration(variable) {
+    if (!(variable in this.declarations)) {
+      let decl = postcss.decl({
+        prop: '--' + variable,
+        value: this.variables[variable],
+        raws: { before: '\n  ', after: '\n' },
+      });
+      this.processDecl(decl);
+      this.declarations[variable] = decl;
+    }
   }
 
   /**
@@ -101,11 +114,31 @@ export default class Visitor {
     return args;
   }
 
-  /**
-   * Returns a `Set` of all variables used by the processed css.
-   * @return {Set}
-   */
-  getUsedVariables() {
-    return this.usedVariables;
+  listProperties(obj) {
+    let properties = Object.create(null);
+
+    for (let [key, subobj] of Object.entries(obj)) {
+      if (subobj instanceof Object) {
+        for (let [piece, value] of Object.entries(
+          this.listProperties(subobj)
+        )) {
+          properties[`${key}-${piece}`] = value;
+        }
+      } else {
+        properties[key] = subobj;
+      }
+    }
+
+    return properties;
+  }
+
+  getDeclarations(includeUnused) {
+    if (includeUnused) {
+      Object.keys(this.variables).forEach(variable =>
+        this.createDeclaration(variable)
+      );
+    }
+
+    return Object.values(this.declarations);
   }
 }

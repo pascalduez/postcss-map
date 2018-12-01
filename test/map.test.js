@@ -18,6 +18,7 @@ let opts = {
     'config.yml',
     'javascript.js',
     'javascript-es6.mjs',
+    'recursive.yml',
   ],
 };
 
@@ -67,6 +68,16 @@ test('javascript:es6', async t => {
     .use(plugin(opts))
     .process(input, { from });
 
+  t.is(result.css, expected);
+});
+
+test('recursive', async t => {
+  const input = read('recursive/input.css');
+  const expected = read('recursive/expected.css');
+
+  const result = await postcss()
+    .use(plugin(opts))
+    .process(input, { from });
   t.is(result.css, expected);
 });
 

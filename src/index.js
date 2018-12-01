@@ -54,9 +54,7 @@ export default postcss.plugin('postcss-map', opts => {
   return async css => {
     await Promise.all(promises);
 
-    const variables = listProperties(maps);
-
-    const visitor = new Visitor(opts, maps, Object.keys(variables));
+    const visitor = new Visitor(opts, maps);
 
     css.walk(node => {
       switch (node.type) {
@@ -68,39 +66,9 @@ export default postcss.plugin('postcss-map', opts => {
       }
     });
 
-    const used = visitor.getUsedVariables();
-
-    const nodes = Object.entries(variables).reduce((arr, [prop, value]) => {
-      if (!opts.includeUnused && !used.has(prop)) return arr;
-
-      arr.push(
-        postcss.decl({
-          prop: '--' + prop,
-          value,
-          raws: { before: '\n  ', after: '\n' },
-        })
-      );
-      return arr;
-    }, []);
-
+    const nodes = visitor.getDeclarations(opts.includeUnused);
     if (nodes.length === 0) return;
 
     css.prepend(postcss.rule({ selector: ':root', nodes }));
   };
 });
-
-function listProperties(obj) {
-  let properties = Object.create(null);
-
-  for (let [key, subobj] of Object.entries(obj)) {
-    if (subobj instanceof Object) {
-      for (let [piece, value] of Object.entries(listProperties(subobj))) {
-        properties[`${key}-${piece}`] = value;
-      }
-    } else {
-      properties[key] = subobj;
-    }
-  }
-
-  return properties;
-}
