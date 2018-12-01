@@ -40,22 +40,62 @@ postcss()
   });
 ```
 
-### Example usage from declaration values
+## Options
 
-map:
+### basePath
+
+type: `String`  
+default: `process.cwd`  
+Directory to resolve map paths against.
+
+### includeUnused
+
+type: `boolean`  
+default: `false`  
+If true generate custom properties for _all_ map variables. Otherwise only generate custom properties for used variables.
+
+### maps
+
+type: `Array`  
+default: `[]`  
+An array representing maps files to load and parse.
+Map files can be YAML, JSON, or Javascript.  
+You can also pass literal objects directly into the Array.
+
+### defaultMap (short syntax)
+
+type: `string`  
+default: `config`
+
+A map to resolve values against if another map is not found. This allows a shorter syntax where you can leave off the map name.
+
+For Example
+
+```js
+let opts = {
+  defaultMap: 'values'
+  maps: ['colors.yml', 'values.yml']
+};
+```
+
+maps:
 
 ```yaml
-# example.yml
-foo:
-  bar:
-    baz: 'yeah!'
+# colors.yml
+main: 'red'
+```
+
+```yaml
+# values.yml
+foo: 'foo value'
 ```
 
 input:
 
 ```css
-.baz {
-  content: map(example, foo, bar, baz);
+.short {
+  content: map(foo); /* Resolves against 'values.yml' */
+  color: map(colors, main); /* Resolves against 'colors.yml' */
 }
 ```
 
@@ -63,15 +103,63 @@ output:
 
 ```css
 :root {
+  --values-foo: 'foo value';
+  --colors-main: 'red';
+}
+
+.short {
+  content: var(--values-foo);
+  color: var(--colors-main);
+}
+```
+
+If you only have a single map all values will automatically resolve against it.
+
+### Example usage
+
+#### declaration values
+
+maps:
+
+```yaml
+# colors.yml
+red: '#FF0000'
+```
+
+```yaml
+# example.yml
+foo:
+  bar:
+    baz: 'yeah!'
+
+main-color: map(colors, red)
+```
+
+input:
+
+```css
+.baz {
+  content: map(example, foo, bar, baz);
+  color: map(example, main-color);
+}
+```
+
+output:
+
+```css
+:root {
+  --colors-red: #ff0000;
+  --example-main-color: var(--colors-red);
   --example-foo-bar-baz: yeah!;
 }
 
 .baz {
   content: var(--example-foo-bar-baz);
+  color: var(--example-main-color);
 }
 ```
 
-### Example usage from at-rules parameters
+#### At-rule parameters
 
 map:
 
@@ -106,7 +194,7 @@ output:
 }
 ```
 
-### Example from declaration blocks
+#### Declaration blocks
 
 map:
 
@@ -150,7 +238,7 @@ output:
 }
 ```
 
-### Example usage with literal objects
+#### Literal objects
 
 ```js
 const fs = require('fs');
@@ -211,7 +299,7 @@ output:
 }
 ```
 
-### Example usage with literal objects and short syntax
+#### Literal objects and short syntax
 
 ```js
 const fs = require('fs');
@@ -254,67 +342,6 @@ output:
 
 .whatever {
   content: var(--one);
-}
-```
-
-## Options
-
-### basePath
-
-type: `String`  
-default: `process.cwd`  
-Base path to retrieve maps from.
-
-### includeUnused
-
-type: `boolean`  
-default: `false`  
-If true output custom properties for all map variables not only ones referenced in the markup.
-
-### maps
-
-type: `Array`  
-default: `[]`  
-An array representing maps files to load and parse.
-Map files can either be in YAML or JSON format.  
-You can also pass literal objects directly into the Array.
-
-### defaultMap (short syntax)
-
-type: `string`  
-default: `config`
-
-A shorter syntax is also available, so you don't have to type the map name on each call. To enable it you need to either have a map called `config` or only one map in your settings.
-
-```js
-let opts = {
-  basePath: 'css',
-  maps: ['foo.yml']
-  // OR
-  maps: ['config.yml', 'breakpoints.yml']
-};
-```
-
-map:
-
-```yaml
-# config.yml
-foo: 'foo value'
-```
-
-input:
-
-```css
-.short {
-  content: map(foo);
-}
-```
-
-output:
-
-```css
-.short {
-  content: 'foo value';
 }
 ```
 
