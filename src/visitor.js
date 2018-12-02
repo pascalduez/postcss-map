@@ -89,7 +89,7 @@ export default class Visitor {
     if (!(variable in this.declarations)) {
       let decl = postcss.decl({
         prop: '--' + variable,
-        value: this.variables[variable],
+        value: this.variables[variable].toString(),
         raws: { before: '\n  ', after: '\n' },
       });
       this.processDecl(decl);
