@@ -51,6 +51,7 @@ export default class Visitor {
       rule.parent.insertBefore(rule, {
         prop,
         value: this.getValue([...normalized, prop]),
+        source: rule.source,
       })
     );
 
