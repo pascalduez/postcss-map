@@ -64,6 +64,6 @@
     "nyc": "^13.1.0",
     "postcss-reporter": "^6.0.0",
     "prettier": "^1.15.2",
-    "tiny-glob": "RedHatter/tiny-glob#absolute-no-glob"
+    "tiny-glob": "^0.2.4"
   }
 }
