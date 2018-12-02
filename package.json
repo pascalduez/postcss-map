@@ -33,7 +33,8 @@
     "build": "babel ./src -d dist",
     "lint": "eslint ./src ./test",
     "test": "ava ./test/*.js",
-    "cover": "nyc ava"
+    "cover": "nyc ava",
+    "prepare": "yarn build"
   },
   "ava": {
     "require": [
