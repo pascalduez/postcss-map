@@ -8,7 +8,7 @@ import Visitor from './visitor';
 
 const readFile = promisify(fs.readFile);
 
-export default postcss.plugin('postcss-map', opts => {
+export default postcss.plugin('postcss-custom-properties-map', opts => {
   opts = {
     maps: [],
     basePath: process.cwd(),

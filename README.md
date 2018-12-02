@@ -1,21 +1,22 @@
-# postcss-map
+# postcss-custom-properties-map
 
 [![npm version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coveralls-image]][coveralls-url]
+[![License][license-image]][license-url]
 
-> [PostCSS] plugin enabling configuration maps that translate into custom properties.
+Interlope external value maps with css as custom properties. Supports Javascript module, YAML file, or JSON file. Use before [postcss-custom-properties] to insert the map values directly into the css.
 
 ## Installation
 
 ```
-npm install postcss-map --save-dev
+npm install postcss-custom-properties-map --save-dev
 ```
 
 or
 
 ```
-yarn add postcss-map --save-dev
+yarn add postcss-custom-properties-map --save-dev
 ```
 
 ## Usage
@@ -23,21 +24,21 @@ yarn add postcss-map --save-dev
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-map');
+const map = require('postcss-custom-properties-map');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
 let opts = {
   basePath: 'css',
-  maps: ['example.yml', 'breakpoints.yml', 'fonts.yml'],
+  maps: ['example.js', 'breakpoints.yml', 'fonts.json'],
 };
 
 postcss()
   .use(map(opts))
   .process(input)
-  .then(result => {
+  .then(result =>
     fs.writeFileSync('output.css', result.css);
-  });
+  );
 ```
 
 ## Options
@@ -159,6 +160,83 @@ output:
 }
 ```
 
+#### With `postcss-custom-properties`
+
+```js
+const fs = require('fs');
+const postcss = require('postcss');
+const map = require('postcss-custom-properties-map');
+const customProperties = require('postcss-custom-properties');
+
+let input = fs.readFileSync('input.css', 'utf8');
+
+postcss()
+  .use(
+    map({
+      maps: ['example.yml'],
+    })
+  )
+  .use(customProperties())
+  .process(input)
+  .then(result =>
+    fs.writeFileSync('output.css', result.css);
+  );
+```
+
+maps:
+
+```yaml
+# example.yml
+foo: yeah!
+```
+
+input:
+
+```css
+.baz {
+  content: map(example, foo);
+}
+```
+
+output:
+
+```css
+.baz {
+  content: yeah!;
+}
+```
+
+#### Javascript module
+
+maps:
+
+```js
+// example.js
+module.exports = {
+  foo: 'yeah!',
+};
+```
+
+input:
+
+```css
+.baz {
+  content: map(example, foo);
+}
+```
+
+output:
+
+```css
+:root {
+  --example-foo: yeah!;
+}
+
+.baz {
+  content: var(--example-foo);
+}
+```
+
 #### At-rule parameters
 
 map:
@@ -243,7 +321,7 @@ output:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-map');
+const map = require('postcss-custom-properties-map');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
@@ -304,7 +382,7 @@ output:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-map');
+const map = require('postcss-custom-properties-map');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
@@ -360,22 +438,15 @@ maps and leverage the short syntax.
 
 ## Credits
 
-- [Pascal Duez](https://github.com/pascalduez)
-- [Bogdan Chadkin](https://github.com/TrySound)
+Thanks to [Pascal Duez](https://github.com/pascalduez) and [Bogdan Chadkin](https://github.com/TrySound) for the inital project [postcss-map](https://github.com/pascalduez/postcss-map).
 
-## Licence
-
-postcss-map is [unlicensed](http://unlicense.org/).
-
-[postcss]: https://github.com/postcss/postcss
+[postcss-custon-properties]: https://github.com/postcss/postcss-custom-properties
 [postcss-plugin-context]: https://github.com/postcss/postcss-plugin-context
-[npm-url]: https://www.npmjs.org/package/postcss-map
-[npm-image]: http://img.shields.io/npm/v/postcss-map.svg?style=flat-square
-[travis-url]: https://travis-ci.org/pascalduez/postcss-map?branch=master
-[travis-image]: http://img.shields.io/travis/pascalduez/postcss-map.svg?style=flat-square
-[coveralls-url]: https://coveralls.io/r/pascalduez/postcss-map
-[coveralls-image]: https://img.shields.io/coveralls/pascalduez/postcss-map.svg?style=flat-square
-[depstat-url]: https://david-dm.org/pascalduez/postcss-map
-[depstat-image]: https://david-dm.org/pascalduez/postcss-map.svg?style=flat-square
-[license-image]: http://img.shields.io/npm/l/postcss-map.svg?style=flat-square
-[license-url]: UNLICENSE
+[npm-url]: https://www.npmjs.org/package/postcss-custom-properties-map
+[npm-image]: http://img.shields.io/npm/v/postcss-custom-properties-map.svg
+[travis-url]: https://travis-ci.com/RedHatter/postcss-custom-properties-map?branch=master
+[travis-image]: http://img.shields.io/travis/RedHatter/postcss-custom-properties-map.svg
+[coveralls-url]: https://coveralls.io/r/RedHatter/postcss-custom-properties-map
+[coveralls-image]: https://img.shields.io/coveralls/RedHatter/postcss-custom-properties-map.svg
+[license-image]: http://img.shields.io/npm/l/postcss-custom-properties-map.svg
+[license-url]: LICENSE

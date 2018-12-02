@@ -4560,9 +4560,10 @@ timed-out@^4.0.0:
   resolved "https://registry.yarnpkg.com/timed-out/-/timed-out-4.0.1.tgz#f32eacac5a175bea25d7fab565ab3ed8741ef56f"
   integrity sha1-8y6srFoXW+ol1/q1Zas+2HQe9W8=
 
-tiny-glob@RedHatter/tiny-glob#absolute-no-glob:
-  version "0.2.3"
-  resolved "https://codeload.github.com/RedHatter/tiny-glob/tar.gz/1173dc08e0b0ef1dfe016edf81a7ced8ac1c4b7f"
+tiny-glob@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/tiny-glob/-/tiny-glob-0.2.4.tgz#11cbdb455903053c885791cbd6e5458a91b9f355"
+  integrity sha512-Tej4Ftrtw9LVQCOiwG+15/sg1vmKG4l0PF3dRBtofyRwv3C0/gU0u3iRQd9YCUR1NPQT3kMB+3w9ecK0qigPRA==
   dependencies:
     globalyzer "^0.1.0"
     globrex "^0.1.1"

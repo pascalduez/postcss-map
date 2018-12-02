@@ -4,13 +4,10 @@
       "@babel/preset-env",
       {
         "targets": {
-          "node": 6
+          "node": "8.10"
         }
       }
     ]
   ],
-  "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
-    "babel-plugin-dynamic-import-node"
-  ]
+  "plugins": ["babel-plugin-dynamic-import-node"]
 }

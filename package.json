@@ -1,24 +1,29 @@
 {
-  "name": "postcss-map",
-  "version": "0.10.0",
-  "description": "PostCSS plugin enabling configuration maps",
+  "name": "postcss-custom-properties-map",
+  "version": "1.0.0",
+  "description": "Interlope external value maps with css as custom properties.",
   "keywords": [
     "css",
+    "custom",
+    "json",
     "map",
     "postcss",
-    "postcss-plugin"
+    "postcss-plugin",
+    "properties",
+    "variables",
+    "yaml"
   ],
-  "author": {
-    "name": "Pascal Duez",
-    "url": "https://github.com/pascalduez"
-  },
-  "homepage": "https://github.com/pascalduez/postcss-map",
-  "bugs": "https://github.com/pascalduez/postcss-map/issues",
+  "homepage": "https://github.com/RedHatter/postcss-custom-properties-map",
+  "bugs": "https://github.com/RedHatter/postcss-custom-properties-map/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pascalduez/postcss-map.git"
+    "url": "git://github.com/RedHatter/postcss-custom-properties-map.git"
   },
-  "license": "Unlicense",
+  "license": "MIT",
+  "author": {
+    "name": "RedHatter",
+    "url": "https://github.com/RedHatter"
+  },
   "files": [
     "dist",
     "CHANGELOG.md",
@@ -26,30 +31,24 @@
     "README.md",
     "UNLICENSE"
   ],
-  "engines": {
-    "node": ">=6.0.0"
-  },
+  "main": "index.js",
+  "module": "src/index.js",
   "scripts": {
     "build": "babel ./src -d dist",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "lint": "eslint ./src ./test",
-    "test": "ava ./test/*.js",
-    "cover": "nyc ava",
-    "prepare": "yarn build"
-  },
-  "ava": {
-    "require": [
-      "@babel/register"
-    ]
+    "prepare": "yarn build",
+    "test": "nyc ava ./test/*.js"
   },
   "dependencies": {
     "js-yaml": "^3.12.0",
     "postcss": "^7.0.6",
-    "reduce-function-call": "^1.0.2"
+    "reduce-function-call": "^1.0.2",
+    "tiny-glob": "^0.2.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/register": "^7.0.0",
     "ava": "^1.0.0-rc.2",
@@ -63,8 +62,14 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "nyc": "^13.1.0",
-    "postcss-reporter": "^6.0.0",
-    "prettier": "^1.15.2",
-    "tiny-glob": "^0.2.4"
+    "prettier": "^1.15.2"
+  },
+  "engines": {
+    "node": ">=8.10"
+  },
+  "ava": {
+    "require": [
+      "@babel/register"
+    ]
   }
 }

@@ -1,14 +1,13 @@
 language: node_js
 
 node_js:
-  - '6'
-  - '8'
-  - 'stable'
+  - '8.10'
+  - 'lts/*'
+  - 'node'
 
 sudo: false
 
 git:
   depth: 10
 
-script: make test
-after_success: make coveralls
+after_success: yarn coverage
