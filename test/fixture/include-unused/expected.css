@@ -1,13 +1,13 @@
 :root {
   --dummy-foo: foo value;
+  --breakpoints-large: 800px;
+  --breakpoints-medium: 321px;
+  --breakpoints-small: 320px;
   --dummy-bar: bar value;
   --dummy-baz-0: one;
   --dummy-baz-1: two;
   --dummy-baz-2: three;
   --dummy-one-two-three: yeah!;
-  --breakpoints-small: 320px;
-  --breakpoints-medium: 321px;
-  --breakpoints-large: 800px;
 }
 .foo {
   content: var(--dummy-foo);

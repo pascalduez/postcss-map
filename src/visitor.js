@@ -135,9 +135,9 @@ export default class Visitor {
 
   getDeclarations(includeUnused) {
     if (includeUnused) {
-      Object.keys(this.variables).forEach(variable =>
-        this.createDeclaration(variable)
-      );
+      Object.keys(this.variables)
+        .sort()
+        .forEach(variable => this.createDeclaration(variable));
     }
 
     return Object.values(this.declarations);
