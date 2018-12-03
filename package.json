@@ -1,5 +1,5 @@
 {
-  "name": "postcss-custom-properties-map",
+  "name": "postcss-custom-property-maps",
   "version": "1.0.0",
   "description": "Interlope external value maps with css as custom properties.",
   "keywords": [
@@ -13,11 +13,11 @@
     "variables",
     "yaml"
   ],
-  "homepage": "https://github.com/RedHatter/postcss-custom-properties-map",
-  "bugs": "https://github.com/RedHatter/postcss-custom-properties-map/issues",
+  "homepage": "https://github.com/RedHatter/postcss-custom-property-maps",
+  "bugs": "https://github.com/RedHatter/postcss-custom-property-maps/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/RedHatter/postcss-custom-properties-map.git"
+    "url": "git://github.com/RedHatter/postcss-custom-property-maps.git"
   },
   "license": "MIT",
   "author": {

@@ -1,4 +1,4 @@
-# postcss-custom-properties-map
+# postcss-custom-property-maps
 
 [![npm version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -10,13 +10,13 @@ Interlope external value maps with css as custom properties. Supports Javascript
 ## Installation
 
 ```
-npm install postcss-custom-properties-map --save-dev
+npm install postcss-custom-property-maps --save-dev
 ```
 
 or
 
 ```
-yarn add postcss-custom-properties-map --save-dev
+yarn add postcss-custom-property-maps --save-dev
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ yarn add postcss-custom-properties-map --save-dev
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-custom-properties-map');
+const map = require('postcss-custom-property-maps');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
@@ -165,7 +165,7 @@ output:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-custom-properties-map');
+const map = require('postcss-custom-property-maps');
 const customProperties = require('postcss-custom-properties');
 
 let input = fs.readFileSync('input.css', 'utf8');
@@ -321,7 +321,7 @@ output:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-custom-properties-map');
+const map = require('postcss-custom-property-maps');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
@@ -382,7 +382,7 @@ output:
 ```js
 const fs = require('fs');
 const postcss = require('postcss');
-const map = require('postcss-custom-properties-map');
+const map = require('postcss-custom-property-maps');
 
 let input = fs.readFileSync('input.css', 'utf8');
 
@@ -442,11 +442,11 @@ Thanks to [Pascal Duez](https://github.com/pascalduez) and [Bogdan Chadkin](http
 
 [postcss-custon-properties]: https://github.com/postcss/postcss-custom-properties
 [postcss-plugin-context]: https://github.com/postcss/postcss-plugin-context
-[npm-url]: https://www.npmjs.org/package/postcss-custom-properties-map
-[npm-image]: http://img.shields.io/npm/v/postcss-custom-properties-map.svg
-[travis-url]: https://travis-ci.com/RedHatter/postcss-custom-properties-map?branch=master
-[travis-image]: http://img.shields.io/travis/RedHatter/postcss-custom-properties-map.svg
-[coveralls-url]: https://coveralls.io/r/RedHatter/postcss-custom-properties-map
-[coveralls-image]: https://img.shields.io/coveralls/RedHatter/postcss-custom-properties-map.svg
-[license-image]: http://img.shields.io/npm/l/postcss-custom-properties-map.svg
+[npm-url]: https://www.npmjs.org/package/postcss-custom-property-maps
+[npm-image]: http://img.shields.io/npm/v/postcss-custom-property-maps.svg
+[travis-url]: https://travis-ci.com/RedHatter/postcss-custom-property-maps?branch=master
+[travis-image]: http://img.shields.io/travis/RedHatter/postcss-custom-property-maps.svg
+[coveralls-url]: https://coveralls.io/r/RedHatter/postcss-custom-property-maps
+[coveralls-image]: https://img.shields.io/coveralls/RedHatter/postcss-custom-property-maps.svg
+[license-image]: http://img.shields.io/npm/l/postcss-custom-property-maps.svg
 [license-url]: LICENSE
