@@ -445,8 +445,8 @@ Thanks to [Pascal Duez](https://github.com/pascalduez) and [Bogdan Chadkin](http
 [npm-url]: https://www.npmjs.org/package/postcss-custom-property-maps
 [npm-image]: http://img.shields.io/npm/v/postcss-custom-property-maps.svg
 [travis-url]: https://travis-ci.com/RedHatter/postcss-custom-property-maps?branch=master
-[travis-image]: http://img.shields.io/travis/RedHatter/postcss-custom-property-maps.svg
-[coveralls-url]: https://coveralls.io/r/RedHatter/postcss-custom-property-maps
-[coveralls-image]: https://img.shields.io/coveralls/RedHatter/postcss-custom-property-maps.svg
+[travis-image]: https://travis-ci.com/RedHatter/postcss-custom-property-maps.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/RedHatter/postcss-custom-property-maps?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/RedHatter/postcss-custom-property-maps/badge.svg?branch=master
 [license-image]: http://img.shields.io/npm/l/postcss-custom-property-maps.svg
 [license-url]: LICENSE
