@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## 1.0.0 - 2018-12-02
 
 ### Added
 
@@ -26,5 +26,3 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Use PostCSS Error and Warning API.
   ([#3](https://github.com/pascalduez/postcss-map/pull/3))
 - Sourcemap information on new declarations.
-
-[unreleased]: https://github.com/pascalduez/postcss-map/compare/master...RedHatter:master
