@@ -128,7 +128,7 @@ output:
 
 ```css
 .whatever {
-  font-family: 'Spinnaker Bold', sans-serif;
+  font-family: 'Spinnaker Regular', sans-serif;
   font-weight: normal;
   font-feature-settings: 'onum', 'kern', 'liga', 'dlig', 'clig';
   font-kerning: normal;
