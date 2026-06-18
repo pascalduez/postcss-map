@@ -16,7 +16,7 @@
   "bugs": "https://github.com/pascalduez/postcss-map/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/pascalduez/postcss-map.git"
+    "url": "git+https://github.com/pascalduez/postcss-map.git"
   },
   "license": "Unlicense",
   "files": [
